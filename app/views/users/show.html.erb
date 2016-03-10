@@ -1,0 +1,81 @@
+<div class="ui container">
+  
+   <div class="ui segment" id="showName">
+       <%=@user.alias%>'s Garage
+   </div>
+   
+<div class="ui container">  
+    <div class="ui items" id="us_su">
+        <div class="item">
+            <div class="ui large image"><%=image_tag @user.avatar.url%></div>
+            <div class="content">
+                <div class="ui right floated">
+                    <div class="ui dropdown">
+                        <i class="ui angle double down icon"></i>
+                        <div class="menu">
+                            <button id="reportBtn" class="ui small basic button item">Report User</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meta"><span>Joined <%=(@user.created_at).strftime('%B %d, %Y')%></span></div>
+                
+                <div class="description">
+                    <p>No greetings yet</p>
+                </div>
+                <div class="extra">
+                    <div class="ui label">
+                        <i class="cubes icon"></i>
+                        <%=pluralize(@user.crates.count, "Crates") %>
+                    </div>
+                    <% if logged_in?%>
+                        <%unless (is_rated?(@user) || current_user == @user) %>
+                        <div class="ui label">
+                           <div class="inline field">
+                               How well you trust this guy? <%=link_to 'Good',:controller =>'users',:action => 'show', :rated_point => '1'%>
+                               or <%=link_to 'Bad',:controller =>'users',:action => 'show', :rated_point => '2'%>
+                           </div>                        
+                        </div>                    
+                        <%end%>
+                    <% end %>
+                </div>
+                <div class="extra">
+                    <div class="ui label">
+                        <div class="ui inline field">
+                            <div class="ui green label"><%=count_good_ratings(@user)%> Good </div>
+                            <div class="ui red label"><%=count_bad_ratings(@user)%> Bad</div>                            
+                            <div class="ui brown label">Rated by <%=ratings_count(@user)%> Users</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+     
+    <%if has_permission? %>
+      <div class="ui label">
+          <%= link_to 'Delete User', @user, method: :delete,data: { confirm: "User will be permanently deleted.You sure?" }%>
+      </div>
+    <%end%>
+
+<div class="ui closable basic modal" id="reportModal">
+    <%#=render 'shared/report_form', user: @user %>
+</div>
+    
+<div class="ui raised segment show" id="showItem">
+       <%=@user.alias%>'s Items
+   </div>
+
+<%=render 'crates/crate_collection', crates: @user.crates %>
+
+
+<script>
+     $('#reportBtn').click(function(){
+        $('#reportModal')
+            .modal('show')
+            .modal('setting','closable',true)
+        ;
+    });
+</script>

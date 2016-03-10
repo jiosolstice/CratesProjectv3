@@ -1,0 +1,12 @@
+<div class="ui center aligned grid">
+    <div class="seven wide column">
+            <header><h1>Change Password</h1></header>
+        <%= form_for @user,url: password_reset_path(params[:id]),html: {class: 'ui large form segment error'}  do |f| %>
+            <%= render 'shared/form_error_messages', object: f.object %>
+            <%= hidden_field_tag :email, @user.email %>
+            <div class="field"><%= f.password_field :password, :placeholder => "Password" %></div>
+            <div class="field"><%= f.password_field :password_confirmation, :placeholder => "Confirm Password"%></div>
+        <%= f.submit "Edit Account", class: "ui submit button"%>
+        <% end %>
+    </div>
+</div>

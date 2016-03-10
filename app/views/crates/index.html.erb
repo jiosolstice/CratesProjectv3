@@ -1,0 +1,35 @@
+
+<%= search_form_for @search, html: { class: 'ui form' ,id: 'advSearch'} do |f|%>   
+    <div class="fifteen fields">
+        <div class="three wide field">
+            <%=f.label :name_cont, 'Advance Search' %>
+            <%=f.text_field :name_cont, class:'ui field'%>
+        </div>
+        <div class="two wide field">
+               <label>Quality</label>
+            <%= f.select :qualities_id_eq, options_from_collection_for_select(Quality.all, 'id', 'name', @search.qualities_id_eq), {include_blank: 'Any'},{ class: 'ui fluid dropdown field'}%>
+        </div>
+        <div class="two wide field">
+               <label>Location</label>
+            <%= f.select :locations_id_eq, options_from_collection_for_select(Location.all, 'id', 'name', @search.locations_id_eq), {include_blank: 'Any'},{ class: 'ui fluid dropdown field'} %>
+        </div>
+        <div class="two wide field">
+               <label>Status</label>
+            <%= f.select :states_id_eq, options_from_collection_for_select(State.all, 'id', 'status', @search.states_id), {include_blank: 'Any'},{ class: 'ui fluid dropdown field'} %>
+        </div>
+        <div class="two wide field">
+            <%=f.label :price_gteq, 'Min Price -' %>
+            <%=f.number_field :price_gteq, class:'ui field', min: '1'%>
+        </div>
+        <div class="two wide field">
+            <%=f.label :price_lteq, 'Max Price' %>
+            <%=f.number_field :price_lteq, class:'ui number field',min: '1'%>
+        </div>
+        <div class="one wide field">
+           <label class="hidden">Search</label>
+            <%=f.submit 'Search', class: 'ui button'%>
+        </div>
+    </div>
+<%end%>
+
+<%= render 'crates/crate_collection', crates: @crates %>

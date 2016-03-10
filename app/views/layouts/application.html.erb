@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <!--[if lt IE9]>
+    <script src="//cdnjs.cloudfare.com/ajax/libs/html5shiv/r29/html5.min.js">
+    </script>
+    <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  
+  <title>CratesProjectv3</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>  
+       <div id="header">
+            <%= render 'layouts/header'%>       
+       </div>        
+       <div id="content">    
+            <%=(render 'shared/error_messages', object: flash)%>
+            <div class="ui main container">
+              
+                            <%=render 'layouts/user_menu' if logged_in?%>
+                            <%=yield%> 
+              
+                </div>
+            </div>   
+   
+       <div id="footer">
+            <%= render 'layouts/footer'%>       
+       </div>
+   
+     
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    
+     <script>
+        $('.ui.dropdown').dropdown();
+         
+        $('.ui .message .close')
+              .on('click', function() {
+                $(this)
+                  .closest('.message')
+                  .transition('fade')
+                ;
+              })
+            ;
+        $('#masonry').masonry({
+          itemSelector: '.mason-item',
+          isFitWidth: true    
+        });     
+         
+         $("#slideshow > div:gt(0)").hide();
+            setInterval(function() { 
+              $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+            },  3000);
+    
+    </script>
+</body>
+</html>

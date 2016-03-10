@@ -1,0 +1,19 @@
+<div class="ui card">
+  <div class="image">
+      <%=image_tag for user.avatar.url%>
+  </div>
+  <div class="content">
+    <div class="header"><%=link_to user.alias, user %></div>
+    <div class="meta">
+        <span class="date"></span>
+    </div>
+    <div class="description">
+      
+    </div>
+  </div>
+  <div class="extra content">
+    
+      <i class="cubes icon"></i>
+        <%#=pluralize(user.crates.count, "Crates") %>
+  </div>
+</div>

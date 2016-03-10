@@ -1,0 +1,16 @@
+<% provide(:title, "Log in") %>
+<div class="ui center aligned grid">
+    <div class="seven wide column">
+                <h1><label>Login to your account</label></h1>
+                    <%= form_for(:session, url: login_path,:html => {:class => 'ui segment form'})   do |f| %>
+                    <div class="field"><%= f.email_field :email, :placeholder => "Email", :required => true%></div>
+                    <div class="field"><%= f.password_field :password, :placeholder => "Password", :required => true %></div>
+                    <div class="left aligned field"><%= link_to "Forgot password?", new_password_reset_path %></div>
+                    <div class="field"><%= f.submit "Login",class:'ui submit button'%></div>
+                    <div class="ui checkbox">
+                       <%= f.check_box :remember_me %>
+                       <label>Remember me on this computer</label>
+                    </div>
+        <% end %>
+    </div>
+</div> 

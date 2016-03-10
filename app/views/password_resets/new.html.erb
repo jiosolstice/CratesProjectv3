@@ -1,0 +1,15 @@
+<div class="ui center aligned grid">
+<%= form_for(:password_reset, url: password_resets_path,html: {class: 'ui form'}) do |f| %>
+    <label><h1>Recover Password</h1></label>
+     <div class="ui dividing header"></div>
+       <div class="ui fields">
+       
+        <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+        </div>
+          <%= f.submit "Submit", class: 'ui primary button'%>
+       </div>
+      
+<%end%>
+</div>

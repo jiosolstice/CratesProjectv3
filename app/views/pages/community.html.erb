@@ -1,0 +1,37 @@
+
+
+<div class="ui container">
+    <h1>Welcome to the Community!</h1>
+    
+    <div class="ui raised segment">
+        Explore Users
+    </div>
+    <div class="ui container" id="userContainer">
+    <% if @users.empty? %>
+       <%='No Crate Found'%>
+    <%else%>
+       <div class="ui cards">
+        <% @users.each do |user|%>
+            <div class="card" style="width: 100px">               
+                <%=image_tag user.avatar.url(:small), style: "height: 100px;width: 100px"%>
+                <div class="content">
+                    <%=link_to user.alias, user%>        
+                </div>
+            </div>
+        <% end %>
+        </div>
+    <% end %>
+    </div>
+    <div class="ui raised segment">
+        Explore BuyNSell Groups!
+    </div>
+    <div class="ui cards">
+        <% @groups.each do |group|%>
+            <div class="card" style="width: 100px">          
+                <div class="header"><%=link_to group.name, group%></div>
+            </div>
+        <% end %>
+    </div>
+    
+    
+</div>

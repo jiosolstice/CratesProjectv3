@@ -1,0 +1,34 @@
+// Place all the styles related to the Pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#home{
+    
+}
+.ui.raised.segment{
+    background: rgb(243,226,199);   
+}
+.ui.huge.crate.button{
+    background: rgb(243,226,199);
+}
+
+#userContainer{
+    min-height: 400px;
+}
+#slideshow { 
+    margin: 0; 
+    position: relative; 
+    max-width: 1300px;
+    min-width: 100%;
+    height: 1000px; 
+     
+    
+}
+
+#slideshow > div { 
+    position: relative; 
+    top: -1em; 
+    left: 7em; 
+    right: 0px; 
+    bottom: 0px; 
+    max-height: 1000px;
+}

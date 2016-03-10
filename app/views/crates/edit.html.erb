@@ -1,0 +1,46 @@
+<%= form_for(@crate,html: {class: "ui inline form error"}) do |f| %>
+<div class="ui field">
+  <!--- -->
+  <div class="ui field">
+     <label>Name</label>
+     <%= f.text_field :name ,required: true,class: 'ui field'%>
+     <label>Description</label>     
+     <%= f.text_area :description,required: true ,class: 'ui field'%>
+     <label>Price</label>
+      PHP <%= f.number_field :price,required: true,class: 'ui field', min: '0', max:'999.999.999.99'%>
+      <label>Tags</label>
+      <%=f.text_field :all_tags, placeholder: "Tags Separated with comma"%>
+  </div>
+  <!--- -->
+  <div class="ui inline field">
+         <label>Quality</label> 
+         <div class="ui radio checkbox">
+         <%= f.radio_button :qualities_id, '1'%> 
+         <%= label :qualities_id_1, '2nd Hand' %>
+         </div>
+         <div class="ui radio checkbox">
+         <%= f.radio_button :qualities_id, '2', :checked => true %>
+         <%= label :qualities_id_2, 'New' %>
+         </div>
+  </div>
+  <!--- -->
+  <div class="ui inline field"> 
+     <label>Status</label> 
+         <div class="ui radio checkbox">
+             <%= f.radio_button :states_id, '1', :checked => true%> 
+             <%= label :state_id_1, 'Buying' %>
+         </div>
+         <div class="ui radio checkbox">
+             <%= f.radio_button :states_id, '2' %>
+             <%= label :state_id_2, 'Selling' %>
+         </div>
+  </div>
+</div>
+    <% @pictures.each do |pic| %>
+       <div class="ui image">
+            <%= image_tag pic.image.url %>   
+       </div>
+    <%end%>
+
+<%= f.submit "Edit Crate", class: "ui primary button" %>
+<% end %>

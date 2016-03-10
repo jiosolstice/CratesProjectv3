@@ -1,0 +1,15 @@
+<div id="masonry">
+     <% if crates.empty? %>
+        <%='No Crate Found'%> 
+    <%else%>
+        <%crates.each do |crate_item|%>
+            <div class="mason-item">
+                <%=render crate_item%>
+            </div>
+        <%end%>    
+    <%end%>
+</div>
+
+<script>
+    
+</script>
