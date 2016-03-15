@@ -1,3 +1,4 @@
+<div class="ui container">
 <%= form_for(@crate,html: {class: "ui inline form error"}) do |f| %>
 <div class="ui field">
   <!--- -->
@@ -35,6 +36,10 @@
              <%= label :state_id_2, 'Selling' %>
          </div>
   </div>
+  <div class="ui inline field"> 
+     <label>Category</label> 
+      <%= f.collection_select(:category_id,Category.all, :id, :name) %>
+  </div>
 </div>
     <% @pictures.each do |pic| %>
        <div class="ui image">
@@ -44,3 +49,6 @@
 
 <%= f.submit "Edit Crate", class: "ui primary button" %>
 <% end %>
+
+
+</div>

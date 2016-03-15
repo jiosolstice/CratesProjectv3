@@ -36,10 +36,17 @@
          </div>
   </div>
   
+  
   <div class="ui inline field"> 
      <label>Prefered Meet-up Location</label> 
       <%= f.collection_select(:locations_id,Location.all, :id, :name) %>
   </div>
+  
+  <div class="ui inline field"> 
+     <label>Category</label> 
+      <%= f.collection_select(:category_id,Category.all, :id, :name) %>
+  </div>
+  
   </div>
   <div class="ui inline field"> 
       <%= file_field_tag "images[]", type: :file, multiple:true%>

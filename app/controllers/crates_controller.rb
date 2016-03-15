@@ -89,7 +89,7 @@ class CratesController < ApplicationController
        
     private
     def crate_params
-        params.require(:crate).permit(:name,:description,:states_id, :all_tags,:price,:qualities_id,:locations_id)
+        params.require(:crate).permit(:name,:description,:states_id, :all_tags,:price,:qualities_id,:locations_id,:category_id)
     end
     
 end
