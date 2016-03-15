@@ -1,35 +1,22 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.ui.raised.segment.show{
-    background-color: rgb(243,226,199);
-    border-radius: 0;
-    border-width: 0px;
-    text-align: center;
+#hd2{
+    margin-bottom: -20px;
 }
 
-#us_su{
-    background-color: rgb(243,226,199);
-    border: none;
+#grid{
+    max-width: 100%;
+    align-content: center !important;
+    margin: 0px !important;
+}
+#col1{
+    min-width: 300px ;
+    max-width: 30% !important;
+
 }
 
-#showName{
-    width: 300px;
-    margin-bottom: 0px;
-    border-radius: 0px;
-    border: none;
-    background-color: rgb(243,226,199);
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-#showItem{
-    margin-bottom: 2em;
-    max-width: 250px;
-}
-#ui.raised.segment{
-    -webkit-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-    box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
+#col2{
+    min-width: 60% !important;
+    max-width: 60% !important;
 }

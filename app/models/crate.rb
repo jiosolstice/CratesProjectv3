@@ -1,5 +1,6 @@
 class Crate < ActiveRecord::Base
   belongs_to :user
+  has_one :category
   has_one :state
   has_one :quality
   has_many :taggings ,:dependent => :delete_all
@@ -13,15 +14,12 @@ class Crate < ActiveRecord::Base
   validates :states_id,presence: true
   validates :price, presence: true
     
+          
     def all_tags=(names)
         self.tags = names.split(",").map do |name|
             Tag.where(name: name.strip).first_or_create!
         end
     end
-    
-    #def all_crates_by=(users)
-    #    users.each
-    #send
 
     def all_tags
         self.tags.map(&:name).join(", ")
@@ -31,4 +29,5 @@ class Crate < ActiveRecord::Base
         Tag.find_by_name!(name).crates
     end
     
+
 end

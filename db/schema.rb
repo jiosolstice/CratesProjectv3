@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309102735) do
+ActiveRecord::Schema.define(version: 20160315012750) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "crates", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -23,8 +29,10 @@ ActiveRecord::Schema.define(version: 20160309102735) do
     t.integer  "states_id",    limit: 4
     t.integer  "qualities_id", limit: 4
     t.decimal  "price",                      precision: 11, scale: 2
+    t.integer  "category_id",  limit: 4
   end
 
+  add_index "crates", ["category_id"], name: "index_crates_on_category_id", using: :btree
   add_index "crates", ["locations_id"], name: "index_crates_on_locations_id", using: :btree
   add_index "crates", ["qualities_id"], name: "index_crates_on_qualities_id", using: :btree
   add_index "crates", ["states_id"], name: "index_crates_on_states_id", using: :btree
@@ -160,6 +168,7 @@ ActiveRecord::Schema.define(version: 20160309102735) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "crates", "categories"
   add_foreign_key "crates", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "crates"

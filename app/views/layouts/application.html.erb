@@ -7,36 +7,44 @@
     <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   
-  <title>CratesProjectv3</title>
+  <title><%=yield(:title)%> CratesProjectv3</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
 </head>
-<body>  
-       <div id="header">
-            <%= render 'layouts/header'%>       
-       </div>        
-       <div id="content">    
-            <%=(render 'shared/error_messages', object: flash)%>
-            <div class="ui main container">
-              
-                            <%=render 'layouts/user_menu' if logged_in?%>
-                            <%=yield%> 
-              
-                </div>
-            </div>   
+<body id="body">
    
-       <div id="footer">
-            <%= render 'layouts/footer'%>       
-       </div>
-   
-     
+    <div class="ui top attached menu">
+        <%if logged_in?%>
+        <a class="item"  id="side_btn"><i class="sidebar icon"></i>Menu</a>
+        <%else%>
+        <a class="item"  href="/login"><i class="user icon"></i>Login</a>
+        <a class="item"  href="/signup"><i class="write icon"></i>Signup</a>        
+        <%end%>
+    </div>
+    <div class="ui thin sidebar inverted vertical menu">
+        <%=render 'layouts/sidebar' if logged_in?%>
+    </div>
+     <h1></h1>
+     <div id="content">
+      <div class="ui active centered large inline loader" id='loader'></div>
+      <%=(render 'shared/error_messages', object: flash)%>
+      <%=yield%>      
+     </div>
+         
+         
+  
     
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     
      <script>
         $('.ui.dropdown').dropdown();
-         
+        
+         $('#side_btn').on('click', function(){
+           $('.ui.sidebar')
+            .sidebar('toggle')
+           ;    
+         })
         $('.ui .message .close')
               .on('click', function() {
                 $(this)
@@ -48,17 +56,7 @@
         $('#masonry').masonry({
           itemSelector: '.mason-item',
           isFitWidth: true    
-        });     
-         
-         $("#slideshow > div:gt(0)").hide();
-            setInterval(function() { 
-              $('#slideshow > div:first')
-                .fadeOut(1000)
-                .next()
-                .fadeIn(1000)
-                .end()
-                .appendTo('#slideshow');
-            },  3000);
+        });
     
     </script>
 </body>

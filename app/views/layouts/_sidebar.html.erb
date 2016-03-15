@@ -1,0 +1,36 @@
+<div class="item">
+    <%=link_to 'Community',community_path%>
+</div>
+<div class="item">
+    <%=link_to 'Home', '/' %>
+</div>
+<div class="item">
+    <%=link_to 'Garage', current_user%>
+</div>
+ 
+
+<div class="item">
+    <%=link_to 'Add Crate', new_crate_path %>
+</div>
+<div class="item">
+    <%=link_to 'Add Crate', new_crate_path %>
+</div>
+<div class="item">
+    <%=link_to 'Add Crate', new_crate_path %>
+</div>
+<div class="item">
+    <%=link_to 'Add Crate', new_crate_path %>
+</div>
+<div class="item">
+    <%=link_to 'Add Crate', new_crate_path %>
+</div>
+
+
+
+<%=link_to 'Edit Account', edit_user_path(current_user),class: 'item' %>
+
+<%unless current_user.profile.nil?%>
+<%=link_to 'Edit Profile', edit_user_profile_path(current_user.id,current_user.profile),class: 'item' %>
+<%end%>
+
+<%=link_to 'Log out',logout_path, method: :delete,class: 'bottom spaced item' %>

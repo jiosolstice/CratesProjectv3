@@ -1,4 +1,4 @@
-
+<div class="ui container">
 <%= search_form_for @search, html: { class: 'ui form' ,id: 'advSearch'} do |f|%>   
     <div class="fifteen fields">
         <div class="three wide field">
@@ -33,3 +33,4 @@
 <%end%>
 
 <%= render 'crates/crate_collection', crates: @crates %>
+</div>

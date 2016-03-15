@@ -19,11 +19,11 @@
 //= require_tree.
 
 $(document).on('page:fetch', function() {
-  $("#pageLoader").show();
-  $('#content').dimmer('show');
+  $('#content').hide();
+  $("#loader").show();
 });
 
 $(document).on('page:change', function() {
-  $("#pageLoader").hide();
-  $('#content').dimmer('hide');
+  $("#loader").hide();
+  $('#content').show();
 });

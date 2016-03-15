@@ -1,9 +1,9 @@
 <% provide(:title, 'Sign up') %>
 <div class="ui center aligned grid">
     <div class="seven wide column">
-            <header><h1>Sign Up</h1></header>
-            <%= form_for(@user,html: {class: "ui large segment form error"})  do |f| %>
-            <%= render 'shared/form_error_messages', object: f.object %>
+            <header><h1>Sign Up for an Account!</h1></header>
+        <%=form_for(@user,html: {class: "ui shadow large segment form error"})  do |f| %>
+            <%=render 'shared/form_error_messages', object: f.object %>
             <div class="ui horizontal divider">Login Account Details</div>
             <div class="field"><%= f.text_field :alias, :placeholder => "Alias",:required => true%></div>
             <div class="field"><%= f.email_field :email, :placeholder => "Email",:required => true%></div>
@@ -11,6 +11,11 @@
             <div class="field"><%= f.password_field :password_confirmation, :placeholder => "Confirm Password" , :required => true%></div>
             <%= f.submit "Create an account", class: "ui submit button"%>
         <% end %>
+        
+        <div class="ui shadow message">
+            Already a member? <%=link_to 'Click here to Login', login_path%>
+        </div>
+    
     </div>
 </div>
 

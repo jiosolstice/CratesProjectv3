@@ -1,15 +1,12 @@
-<div class="ui container">
-  
-   <div class="ui segment" id="showName">
-       <%=@user.alias%>'s Garage
-   </div>
-   
-<div class="ui container">  
-    <div class="ui items" id="us_su">
-        <div class="item">
-            <div class="ui large image"><%=image_tag @user.avatar.url%></div>
-            <div class="content">
-                <div class="ui right floated">
+<%=provide(:title, @user.alias + " 's Garage ") %>
+
+   <div class="ui container">
+    
+     <div class="ui stackable three column grid" id="grid">
+         <div class="one column" id="col1">
+           <div class="ui card">
+         <div class="extra content">
+             <div class="ui right floated">
                     <div class="ui dropdown">
                         <i class="ui angle double down icon"></i>
                         <div class="menu">
@@ -17,58 +14,68 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="meta"><span>Joined <%=(@user.created_at).strftime('%B %d, %Y')%></span></div>
-                
+         </div>
+         
+          <div class="image">
+              <%=image_tag @user.avatar.url(:medium) ,class: 'ui medium image'%>
+          </div>
+          <div class="content">
+              <div class="header"><%=@user.alias%></div>
+                <div class="meta">
+                 <span class="date">Joined <%=(@user.created_at).strftime('%B %d, %Y')%></span>
+                </div>
                 <div class="description">
-                    <p>No greetings yet</p>
+                <span><i class="cubes icon"></i><%=pluralize(@user.crates.count, "Crates")%> on Garage</span>
+                
                 </div>
-                <div class="extra">
-                    <div class="ui label">
-                        <i class="cubes icon"></i>
-                        <%=pluralize(@user.crates.count, "Crates") %>
-                    </div>
-                    <% if logged_in?%>
-                        <%unless (is_rated?(@user) || current_user == @user) %>
-                        <div class="ui label">
-                           <div class="inline field">
-                               How well you trust this guy? <%=link_to 'Good',:controller =>'users',:action => 'show', :rated_point => '1'%>
-                               or <%=link_to 'Bad',:controller =>'users',:action => 'show', :rated_point => '2'%>
-                           </div>                        
-                        </div>                    
-                        <%end%>
-                    <% end %>
-                </div>
-                <div class="extra">
-                    <div class="ui label">
-                        <div class="ui inline field">
-                            <div class="ui green label"><%=count_good_ratings(@user)%> Good </div>
-                            <div class="ui red label"><%=count_bad_ratings(@user)%> Bad</div>                            
-                            <div class="ui brown label">Rated by <%=ratings_count(@user)%> Users</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    
+          </div>
+          <div class="extra content">
+           <div class="header" id="hd2">Trust Rating</div>
+            <h3>
+            <span class="right floated created">
+                <%=ratings_count(@user)%><i class="users icon"></i>
+            </span>
+            <span><%=count_good_ratings(@user)%><i class="green thumbs outline up icon"></i></span>
+            <i class="red thumbs outline down icon"></i><%=count_bad_ratings(@user)%>
+            </h3>
+          </div>
+          <% if logged_in?%>
+               <%unless (is_rated?(@user) || current_user == @user) %>
+          <div class="ui two bottom attached basic buttons">
+              <div class="ui button"><%=link_to 'Rate User',:controller =>'users',:action => 'show', :rated_point => '1'%> <i class="green thumbs outline up icon"></i></div>
+              <div class="ui button"><%=link_to 'Rate User',:controller =>'users',:action => 'show', :rated_point => '2'%>
+              <i class="red thumbs outline down icon"></i>
+              </div>
+          </div>
+               <%end%>
+          <% end %>
+       </div>      
+         </div>
+         <div class="two column" id="col2">         
+             <%=render 'crates/crate_collection', crates: @user.crates %>
+
+         </div>
+     </div> 
      
-    <%if has_permission? %>
+     <%if has_permission? %>
       <div class="ui label">
           <%= link_to 'Delete User', @user, method: :delete,data: { confirm: "User will be permanently deleted.You sure?" }%>
       </div>
     <%end%>
+     
+    </div>
+        
+     
+     
+    
+
+
+
 
 <div class="ui closable basic modal" id="reportModal">
     <%#=render 'shared/report_form', user: @user %>
 </div>
-    
-<div class="ui raised segment show" id="showItem">
-       <%=@user.alias%>'s Items
-   </div>
 
-<%=render 'crates/crate_collection', crates: @user.crates %>
 
 
 <script>
@@ -78,4 +85,5 @@
             .modal('setting','closable',true)
         ;
     });
+    
 </script>

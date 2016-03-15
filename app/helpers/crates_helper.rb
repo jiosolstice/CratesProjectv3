@@ -26,6 +26,10 @@ module CratesHelper
         number_with_delimiter(price, delimiter: ',', separator: '.')
     end
     
+    def catgory(c)
+        Category.find(c).name
+    end
+    
     def simplify(object, lengt)
         simple_format(truncate(object, length: lengt))
     end
