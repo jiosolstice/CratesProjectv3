@@ -4,6 +4,12 @@
 #Rating.create(id:2,rating_name:'bad')
 #State.create(id: '1',status: 'Buying',color:'blue')
 #State.create(id: '2',status: 'Selling',color:'green')
+#State.create(id: '3',status: 'Completed',color:'gray')
+#ActiveStatus.create(id: '1', name: 'active')
+#ActiveStatus.create(id: '2', name: 'inactive')
+#ActiveStatus.create(id: '3', name: 'finish')
+#UserStatus.create(name:'active')
+#UserStatus.create(name:'disabled')
 #Quality.create(id:'1',name:'2nd hand')
 #Quality.create(id:'2',name:'New')
 #sample seeding for locations

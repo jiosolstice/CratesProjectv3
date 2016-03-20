@@ -1,0 +1,18 @@
+
+   <div class="item">
+       <div class="content">
+         <div class="meta">
+             <div class="ui fields">
+                 <div class="ui field">
+                     <%=link_to target_user(report.reporter).alias, @target_user %>
+                 </div>
+                 <div class="ui field">  
+                     <%=link_to target_user(report.reported_id).alias, target_user(report.reported_id)%>        
+                 </div>
+             </div>
+             <div class="description">
+                 <%=report.description%>
+             </div>    
+         </div>
+       </div>
+    </div>

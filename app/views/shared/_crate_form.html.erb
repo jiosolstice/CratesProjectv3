@@ -49,7 +49,7 @@
   
   </div>
   <div class="ui inline field"> 
-      <%= file_field_tag "images[]", type: :file, multiple:true%>
+      <%= file_field_tag "images[]", type: :file, multiple:true, accept:'image/*'%>
   </div>
   <%= f.submit 'Post', class: 'ui primary button' %>
 <% end %>

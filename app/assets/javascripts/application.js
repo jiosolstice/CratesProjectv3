@@ -14,16 +14,17 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require semantic
+//= require forem
 //= require masonry.pkgd.min
 //= require turbolinks
 //= require_tree.
 
 $(document).on('page:fetch', function() {
   $('#content').hide();
-  $("#loader").show();
+  $('#loader').show();
 });
 
 $(document).on('page:change', function() {
-  $("#loader").hide();
+  $('#loader').hide();
   $('#content').show();
 });

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
     
   def show
-      #@report = Report.new
+      @report = Report.new
       @user = User.find(params[:id])
       if (params.has_key?(:rated_point) && params.has_key?(:id))
         current_user.user_ratings.new(rating_id: params[:rated_point],rated_person: params[:id]).save unless is_rated?(params[:id])

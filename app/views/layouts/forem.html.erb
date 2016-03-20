@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <!--[if lt IE9]>
+    <script src="//cdnjs.cloudfare.com/ajax/libs/html5shiv/r29/html5.min.js">
+    </script>
+    <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  
+  <title><%=yield(:title)%> CratesProjectv3</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body id="body">
+   
+    <div class="ui top attached menu">
+        <a class="item"  id="side_btn"><i class="sidebar icon"></i>Menu</a>     
+    </div>
+    <div class="ui thin sidebar inverted vertical menu">
+        <div class="item"><%=link_to 'Crates Home', main_app.root_path %> </div>
+    </div>
+     <h1></h1>
+     <div  class="ui container" id="content">
+      <div class="ui active centered large inline loader" id='loader'></div>
+      <%=yield%>      
+     </div>
+         
+         
+  
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    
+     <script>
+      
+         $('#side_btn').on('click', function(){
+           $('.ui.sidebar')
+            .sidebar('toggle')
+           ;    
+         })
+         
+        $('.ui .message .close')
+              .on('click', function() {
+                $(this)
+                  .closest('.message')
+                  .transition('fade')
+                ;
+              })
+            ;
+    
+    
+    </script>
+</body>
+</html>

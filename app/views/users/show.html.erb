@@ -57,23 +57,18 @@
          </div>
      </div> 
      
-     <%if has_permission? %>
+    <%if has_permission?(@user) %>
       <div class="ui label">
           <%= link_to 'Delete User', @user, method: :delete,data: { confirm: "User will be permanently deleted.You sure?" }%>
       </div>
     <%end%>
      
     </div>
-        
-     
-     
-    
-
 
 
 
 <div class="ui closable basic modal" id="reportModal">
-    <%#=render 'shared/report_form', user: @user %>
+    <%=render 'shared/report_form', user: @user %>
 </div>
 
 

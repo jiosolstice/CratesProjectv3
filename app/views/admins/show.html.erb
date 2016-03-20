@@ -1,0 +1,28 @@
+<%=provide(:title, "Fam yo") %>
+<div class="ui container">
+    <h2>
+        Admin Options
+    </h2>
+
+    <h3>Report List</h3>
+    <div class="ui items">
+        <%@reports.each do |report| %>
+            <%=render 'reports/report', report: report%>
+        <%end%>
+    </div>
+
+
+
+    <h2>Admin List</h2>
+    <div class="ui cards">
+            <%@admins.each do |admin|%>
+                <div class="card" style="width: 100px">
+                    <%user = User.find(admin.id)%>          
+                    <%=image_tag user.avatar.url(:small), style: "height: 100px;width: 100px"%>
+                    <%=link_to user.alias, user, class:'content'%>        
+                </div>
+            <% end %>
+    </div>
+
+
+</div>

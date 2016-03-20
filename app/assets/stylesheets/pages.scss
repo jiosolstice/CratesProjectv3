@@ -14,21 +14,7 @@
 #userContainer{
     min-height: 400px;
 }
-#slideshow { 
-    margin: 0; 
-    position: relative; 
-    max-width: 1300px;
-    min-width: 100%;
-    height: 1000px; 
-     
-    
-}
 
-#slideshow > div { 
-    position: relative; 
-    top: -1em; 
-    left: 7em; 
-    right: 0px; 
-    bottom: 0px; 
-    max-height: 1000px;
+#dash_cont{
+    min-height: 1000px !important;
 }

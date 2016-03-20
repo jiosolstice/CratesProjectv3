@@ -56,3 +56,53 @@ vanilla {
     visibility: hidden;
     
 }
+
+/* masonry use */
+
+#masonry{
+    max-width: 1500px;
+    min-width: 100%;
+}
+
+
+.mason-item{
+    width: 200px;
+    margin: 7px;
+}
+
+#cratePartial{
+    max-width: inherit;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 10px;
+    background-color: bisque;
+    border-color: beige;
+    -webkit-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
+    box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
+}
+
+
+#status_tag{
+    border-radius: 0px;
+}
+
+img.display{
+    display: block;
+    width: inherit;
+}
+#content_wrapper{
+    border-width: 0px;
+    border-style: none;
+    padding: 1em;
+}
+
+@media only screen and (max-width : 933px)
+    
+{
+    .mason-item{
+        margin: 10px;
+    }
+    
+    
+}

@@ -38,4 +38,6 @@ module CratesHelper
         pic.image.url(:thumb)
     end
     
+        
+    
 end

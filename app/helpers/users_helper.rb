@@ -6,8 +6,8 @@ module UsersHelper
     end
     include ForController
     
-    def has_permission?
-        logged_in? #&& current_user.admin?
+    def has_permission?(user)
+        logged_in? && ( admin? || current_user?(user))
     end
     
     def count_good_ratings(rated_person)

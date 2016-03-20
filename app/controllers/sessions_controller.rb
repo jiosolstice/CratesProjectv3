@@ -1,16 +1,35 @@
 class SessionsController < ApplicationController
+    before_action :check_user, only: [:create,:new]
+    
+    def new
+        
+    end
+    
+    def check_user
+        if current_user != nil
+            message = "You are already logged in."
+            flash[:message] = message
+            redirect_to root_url
+        end
+    end
     
   def create
       user = User.find_by(email: params[:session][:email].downcase)
+      
       if user && user.authenticate(params[:session][:password])
-          # Log the user in and redirect to the user's show page.
-          if user.activated?
-            log_in user
-            params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-              if user.profile.nil?
-                  redirect_to new_user_profile_url(user.id)
+          if user.activated? 
+              if user_status_enab(user)
+                message = "Your Account appears to be disabled"
+                flash[:warning] = message   
+                redirect_to root_url
               else
-                  redirect_to root_url
+                log_in user
+                params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+                if user.profile.nil?
+                    redirect_to new_user_profile_url(user.id)
+                else
+                    redirect_to root_url
+                end
               end
           else
             message  = 'Account not activated.'
@@ -29,6 +48,12 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end 
+    
+  private 
+    def user_status_enab(user)
+        user.user_status_id != 1
+    end
+        
   
     
 end

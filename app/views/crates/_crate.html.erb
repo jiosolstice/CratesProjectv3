@@ -1,19 +1,30 @@
-<div class="ui ui center aligned container" id="cratePartial">        
-          <div id="ui content">
-              <div class="right floated inline meta">
-                  <div class="ui <%=find_state_color crate.states_id%> label raised segment" id="status_tag">
+<div class="ui ui center aligned container" id="cratePartial">
+         
+                
+        <div class="ui card">
+         <div class="extra content">
+             <div class="ui left floated">
+                    <div class="ui <%=find_state_color crate.states_id%> label raised segment" id="status_tag">
                     <%=find_status crate.states_id %>
                   </div>
-              </div>
-              <div  class="ui center aligned" id="image_wrapper">
-                  <%=image_tag show_thumb(crate.pictures.first), style: "height: 150px;width: 150px" if crate.pictures.first != nil%>
-              </div>
+                </div>
+         </div>
+         
+          <div class="image">
+              <%=image_tag show_thumb(crate.pictures.first), class: 'ui small image' if crate.pictures.first != nil%>
           </div>
-          <div id="content_wrapper">
-            <div class="ui">
-                <p><%=link_to simplify(crate.name,25), crate%></p>
-            </div>
-            <div class="extra">
+          
+          <div class="content">
+              <div class="header"><%=link_to crate.name,crate%></div>
+                <div class="meta">
+                 <div class="timestamp">Posted <%= time_ago_in_words(crate.created_at) %> ago.</div>
+                </div>
+                <div class="description">
+                    <p><%=link_to simplify(crate.description,25), crate%></p>
+                </div>
+          </div>
+          
+          <div class="extra content">
                 <div class="ui label">
                     <i class="money icon"></i><span class="cinema">Php <%=delmited_price(crate.price)%></span>
                 </div>
@@ -21,9 +32,8 @@
                 <div class="tag"><i class="tags icon"></i>Tags: <%=raw tag_links(crate.all_tags)%></div>
                 <div class="tag"><i class="cube icon"></i><%=crate_quality(crate.qualities_id)%></div>
                 <div class="tag"><%=catgory(crate.category_id)%></div>
-                <div class="timestamp">Posted <%= time_ago_in_words(crate.created_at) %> ago.</div>
-            </div>
-          </div>  
+          </div>
+       </div>
 </div>
 
 

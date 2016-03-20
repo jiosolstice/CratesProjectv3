@@ -14,9 +14,7 @@
         <% @users.each do |user|%>
             <div class="card" style="width: 100px">               
                 <%=image_tag user.avatar.url(:small), style: "height: 100px;width: 100px"%>
-                <div class="content">
-                    <%=link_to user.alias, user%>        
-                </div>
+                <%=link_to user.alias, user, class:'content'%>        
             </div>
         <% end %>
         </div>
@@ -25,6 +23,7 @@
     <div class="ui raised segment">
         Explore BuyNSell Groups!
     </div>
+    
     <div class="ui cards">
         <% @groups.each do |group|%>
             <div class="card" style="width: 100px">          

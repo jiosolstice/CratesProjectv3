@@ -8,54 +8,6 @@
         
 }
 
-.ui.segment.desc{
-    border-radius: 0rem;
-    -webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-    border-width: 0px;
-}
-#masonry{
-    max-width: 1500px;
-    min-width: 100%;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-}
-
-
-.mason-item{
-    width: 200px;
-    margin: 7px;
-}
-
-#cratePartial{
-    max-width: inherit;
-    border-width: 1px;
-    border-style: solid;
-    background-color: bisque;
-    border-color: beige;
-    -webkit-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-    box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-}
-
-
-#status_tag{
-    border-radius: 0px;
-}
-
-img.display{
-    display: block;
-    width: inherit;
-}
-#content_wrapper{
-    border-width: 0px;
-    border-style: none;
-    padding: 1em;
-}
-
-
 .hidden {
     visibility: hidden;
 }
@@ -64,12 +16,3 @@ img.display{
     margin-bottom: 2em;
 }
 
-@media only screen and (max-width : 933px)
-    
-{
-    .mason-item{
-        margin: 0px;
-    }
-    
-    
-}

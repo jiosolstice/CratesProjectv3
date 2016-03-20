@@ -3,6 +3,7 @@ class Crate < ActiveRecord::Base
   has_one :category
   has_one :state
   has_one :quality
+  has_one :active_status
   has_many :taggings ,:dependent => :delete_all
   has_many :tags, :through => :taggings
   has_many :pictures, :dependent => :delete_all
@@ -14,10 +15,9 @@ class Crate < ActiveRecord::Base
   validates :states_id,presence: true
   validates :price, presence: true
     
-          
     def all_tags=(names)
         self.tags = names.split(",").map do |name|
-            Tag.where(name: name.strip).first_or_create!
+            Tag.where(name: name.strip).first_or_create! unless name == ""
         end
     end
 

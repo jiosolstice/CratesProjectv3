@@ -29,6 +29,7 @@ gem 'ransack', '~> 1.7'
 gem 'groupify'
 #message board
 gem 'forem', :github => "radar/forem", :branch => "rails4"
+
 #pagination
 gem 'kaminari', '0.15.1'
 

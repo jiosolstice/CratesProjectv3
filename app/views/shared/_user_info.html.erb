@@ -1,6 +1,6 @@
 <div class="ui card">
   <div class="image">
-      <%=image_tag for user.avatar.url%>
+      <%=link_to(image_tag(user.avatar.url), user) %>
   </div>
   <div class="content">
     <div class="header"><%=link_to user.alias, user %></div>
@@ -12,8 +12,6 @@
     </div>
   </div>
   <div class="extra content">
-    
-      <i class="cubes icon"></i>
-        <%#=pluralize(user.crates.count, "Crates") %>
+  wewe
   </div>
 </div>
