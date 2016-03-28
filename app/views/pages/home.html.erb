@@ -1,34 +1,77 @@
-
-
-
-<div class="ui container">
-
-    <div class="ui top attached tabular menu" id="dash_tab">
-      <a class="item active" data-tab="all_crates">All Crates</a>
-      <a class="item" data-tab="act_crates">Active Crates</a>
-      <a class="item" data-tab="inact_crates">Inactive Crates</a>
-      <a class="item" data-tab="fin_crates">Finished Crates</a>
-    </div>
-    
-    <div class="ui bottom attached segment" id="dash_cont">
+<header>
+   <ui class="ui container">
+       <%=image_tag @current_user.avatar.url, class: 'ui float left tiny image'%>
+     Currently Logged in : <%=@current_user.alias%>
+     <br>
+     Contact Number: <%=@current_user.profile.phone_number unless nil%> 
+      <ul>
+         <div class="header">Crates</div>
+          <li>Active: <%=@active_crates.size%></li>
+          <li>Inactive: <%=@inactive_crates.size%></li>
+          <li>Finished: <%=@fin_crates.size%></li>
+          <li>Total: <%=@active_crates.size + @inactive_crates.size + @fin_crates.size%> </li>
+      </ul>
+         <div class="ui celled list">
+         <div class="header">Active Crates</div>
+          <%@active_crates.each do |crate| %>
+              <%=link_to crate.name, crate , class: 'item'%>
+              <% unless crate == '' || crate == nil %>
+                 <%=link_to 'Inactivate',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 2%> 
+                  <br>
+                 <%=link_to 'list as Finished',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 3%> 
+              <%end%>
+          <%end%>
+      </div>
       
-        <div class="ui tab" data-tab="all_crates">
-              
-        </div>
-        <div class="ui tab" data-tab="act_crates">
-            <%= render 'crates/crate_collection', crates: @active_crates %>
-        </div>
-        
-        <div class="ui tab" data-tab="inact_crates">
-            <%= render 'crates/crate_collection', crates: @inactive_crates %>
-        </div>
-        <div class="ui tab" data-tab="fin_crates">
-              
-        </div>
-        
-        
-    </div>
+      <div class="ui celled list">
+         <div class="header">Inactive Crates</div>
+          <%@inactive_crates.each do |crate| %>
+              <%=link_to crate.name, crate , class: 'item'%>
+              <% unless crate == '' || crate == nil %>
+                  <%=link_to 'Activate',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 1%>
+              <%end%>
+          <%end%>     
+      </div>
+     
+      <div class="ui celled list">
+      <div class="header">Finished Crates</div>
+          <%@fin_crates.each do |crate| %>
+              <%=link_to crate.name, crate , class: 'item'%>
+              <% unless crate == '' || crate == nil %>
+                  <%=link_to 'Activate',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 1%>
+              <%end%>
+          <%end%>      
+      </div>
+          
+   </ui>
+</header>
+     <table class="ui celled table">
+         <thead>
+            <tr>
+                <th>x</th>
+            </tr>
+         </thead>
+         <tbody>
+            
+             
+         </tbody>
+     </table>
+     
+     
+      
+      
+<h1></h1>
+      
+      
+      
+      
+      
+   
+
     
-</div>
+     
+  
+
+
 
 

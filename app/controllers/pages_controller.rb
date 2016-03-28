@@ -1,12 +1,19 @@
 class PagesController < ApplicationController
+    before_action :is_logged_in, only: [:home]
     
+    
+    def is_logged_in
+        render :home_guest unless logged_in?
+    end
     
     def home
-        render :home_guest unless logged_in?
-        if logged_in?
-            @active_crates = Crate.where(["user_id = ? and active_status_id = ?", current_user.id , 1])
-            @inactive_crates = Crate.where(["user_id = ? and active_status_id = ?", current_user.id , 2])
+        @active_crates = search_byst(current_user.id, 1)
+        @inactive_crates = search_byst(current_user.id, 2)
+        @fin_crates = search_byst(current_user.id, 3)
+        if (params.has_key?(:crate_id) && params.has_key?(:active_id))
+            Crate.find(params[:crate_id]).update_attributes(active_status_id: params[:active_id])
         end
+        
     end
     
 
@@ -16,10 +23,16 @@ class PagesController < ApplicationController
     def community
         @users = User.all
         @groups = Group.all
+        @forum_cat = ForumCategory.all
     end
     
     def home_guest
         
+    end
+    
+    private
+    def search_byst(us_id,st_id)
+        Crate.where(["user_id = ? and active_status_id = ?", us_id , st_id])
     end
     
 end

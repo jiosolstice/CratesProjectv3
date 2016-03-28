@@ -1,7 +1,7 @@
 <% provide(:title, 'Sign up') %>
 <div class="ui center aligned grid">
     <div class="seven wide column">
-            <header><h1>Sign Up for an Account!</h1></header>
+            <div class="header"><h1>Sign Up for an Account!</h1></div>
         <%=form_for(@user,html: {class: "ui shadow large segment form error"})  do |f| %>
             <%=render 'shared/form_error_messages', object: f.object %>
             <div class="ui horizontal divider">Login Account Details</div>

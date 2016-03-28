@@ -14,12 +14,14 @@ class User < ActiveRecord::Base
     has_one :user_status
     has_many :reportables
     has_many :reports, through: :reportables
+    has_many :forum_posts
+    has_many :forum_comments
     
     #avatar
     has_attached_file :avatar, styles: {
             :small => { :geometry => "100x100!" },
             :medium => { :geometry => "300x300!"} 
-        }, default_url: "/images/:style/missing.png"
+        }, default_url: "/images/:style/missing_:style.png"
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
     #Validation
     validates :password, presence: true, length: { minimum: 6 , maximum: 32}, allow_nil: true
@@ -29,15 +31,6 @@ class User < ActiveRecord::Base
     #others
     default_scope {order('users.alias ASC')}
     attr_accessor :remember_token, :activation_token, :reset_token
-    
-    #forem methods
-    def forem_name
-        self.alias
-    end
-    
-    def forem_email
-        self.email
-    end
     
     # Returns the hash digest of the given string.
     def User.digest(string)

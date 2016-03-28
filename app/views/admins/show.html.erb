@@ -1,5 +1,8 @@
 <%=provide(:title, "Fam yo") %>
 <div class="ui container">
+   
+   
+   
     <h2>
         Admin Options
     </h2>
@@ -11,13 +14,13 @@
         <%end%>
     </div>
 
-
+    
 
     <h2>Admin List</h2>
     <div class="ui cards">
             <%@admins.each do |admin|%>
                 <div class="card" style="width: 100px">
-                    <%user = User.find(admin.id)%>          
+                    <%user = User.find(admin.id)%>
                     <%=image_tag user.avatar.url(:small), style: "height: 100px;width: 100px"%>
                     <%=link_to user.alias, user, class:'content'%>        
                 </div>

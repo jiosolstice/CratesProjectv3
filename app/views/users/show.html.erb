@@ -15,7 +15,6 @@
                     </div>
                 </div>
          </div>
-         
           <div class="image">
               <%=image_tag @user.avatar.url(:medium) ,class: 'ui medium image'%>
           </div>
@@ -52,8 +51,7 @@
        </div>      
          </div>
          <div class="two column" id="col2">         
-             <%=render 'crates/crate_collection', crates: @user.crates %>
-
+             <%=render 'crates/crate_collection', crates: @act_crates %>
          </div>
      </div> 
      
@@ -69,7 +67,7 @@
 
 <div class="ui closable basic modal" id="reportModal">
     <%=render 'shared/report_form', user: @user %>
-</div>
+</div>    
 
 
 

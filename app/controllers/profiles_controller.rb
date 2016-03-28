@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
     
     #redirect to root if profile already exist
     def check_profile
-         @user = User.find(params[:user_id])
+        @user = User.find(params[:user_id])
         redirect_to root_url if !@user.profile.nil?
     end
     
@@ -44,11 +44,8 @@ class ProfilesController < ApplicationController
     end
     
     def update
-        @user = User.find(params[:id])
-        @profile = @user.build_profile
-        @profile = @user.build_profile(profile_params)
-        if 
-            #@user.update_attributes(avatar: params[:user][:avatar]) unless params[:user][:avatar] == nil
+        @user = User.find(params[:user_id])
+        if @user.profile.update_attributes(profile_params)
             flash[:success] = 'Profile updated'
             redirect_to @user
         else

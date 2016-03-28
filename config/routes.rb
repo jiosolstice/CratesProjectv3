@@ -1,29 +1,19 @@
 Rails.application.routes.draw do
-
-  # This line mounts Forem's routes at /forums by default.
-  # This means, any requests to the /forums URL of your application will go to Forem::ForumsController#index.
-  # If you would like to change where this extension is mounted, simply change the :at option to something different.
-  #
-  # We ask that you don't use the :as option here, as Forem relies on it being the default of "forem"
-  mount Forem::Engine, :at => '/forums'
-
-  get 'password_resets/new'
-  get 'password_resets/edit'
-
+    get 'password_resets/new'
+    get 'password_resets/edit'
     root 'pages#home'
-    
     get 'fam' => 'admins#show', as: 'admin'
-    
     get 'signup' => 'users#new'
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
-    
     get 'search' => 'crates#index'
-    
     get 'community' => 'pages#community', as: 'community'
     get 'tags/:tag', to: 'crates#index', as: 'tag'
-    get 'help_desk' => 'pages#help', as: 'help'
+    get 'help' => 'pages#help', as: 'help'
+    get 'change_pin' => 'forum_posts#change_pin'
+    get 'change_lock' => 'forum_posts#change_lock'
+    post 'new_comment' => 'forum_comments_controller#create', as: 'new_comment'
     
     resources :users do
         resources :profiles
@@ -33,46 +23,10 @@ Rails.application.routes.draw do
     resources :crates
     resources :account_activations, only: [:edit]
     resources :password_resets, only: [:new, :create, :edit, :update]
-     resources :reports, only: [:create,:destroy,:show,:index]
- 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-    
+    resources :reports, only: [:create,:destroy,:show,:index]
+    resources :forum_categories, only: [:show]
+    resources :forum_posts, only: [:new,:create,:destroy,:show,:edit,:update] do
+        resources :forum_comments, only: [:new,:create,:destroy,:edit,:update] 
+    end
+    resources :forum_comments, only: [:new,:create,:destroy,:edit,:update] 
 end

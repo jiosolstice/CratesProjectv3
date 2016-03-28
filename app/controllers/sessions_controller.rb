@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
                 if user.profile.nil?
                     redirect_to new_user_profile_url(user.id)
                 else
-                    redirect_to root_url
+                    redirect_back_or root_url
                 end
               end
           else

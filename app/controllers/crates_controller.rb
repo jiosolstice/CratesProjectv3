@@ -6,17 +6,15 @@ class CratesController < ApplicationController
     rescue_from ::ActiveRecord::InvalidForeignKey, with: :dont_url_manipulate
 
     def index
-        @search = Crate.ransack(params[:q])
+        @crates = Crate.where(:active_status_id => '1')
+        @search = Crate.where(:active_status_id => '1').ransack(params[:q])
         if params.has_key?(:name)
-            @crates = Crate.quick_find(params[:name])
-        else
-            if params[:tag]
-                @crates = Crate.tagged_with(params[:tag])
-            else
-                @crates = @search.result
-            end
-        end
-        
+            @crates = Crate.find_by(name:params[:name])
+        elsif params[:tag]
+            @crates = Crate.tagged_with(params[:tag]).where(:active_status_id => '1')
+        elsif params[:q]
+            @crates = @search.result 
+        end       
     end
     
     
@@ -41,7 +39,7 @@ class CratesController < ApplicationController
                 }
             end  
             flash[:success] = 'Crate has been posted!'
-            redirect_to root_url
+            redirect_to @crate
         else
             render '/'
         end        
@@ -75,8 +73,6 @@ class CratesController < ApplicationController
         redirect_to '/'
     end
     
-    
-    
     def correct_crate
         @crate = Crate.find(params[:id])
         redirect_to root_url if current_user.id != @crate.user.id
@@ -85,6 +81,7 @@ class CratesController < ApplicationController
     def show
         @crate = Crate.find(params[:id])
         @images = @crate.pictures
+        @contact = @crate.user.profile.phone_number
     end
        
     private

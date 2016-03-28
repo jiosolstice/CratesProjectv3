@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320034448) do
+ActiveRecord::Schema.define(version: 20160327065046) do
 
   create_table "active_statuses", force: :cascade do |t|
     t.string "name", limit: 255
@@ -51,102 +51,37 @@ ActiveRecord::Schema.define(version: 20160320034448) do
   add_index "crates", ["user_id", "created_at"], name: "index_crates_on_user_id_and_created_at", using: :btree
   add_index "crates", ["user_id"], name: "index_crates_on_user_id", using: :btree
 
-  create_table "forem_categories", force: :cascade do |t|
-    t.string   "name",       limit: 255,             null: false
+  create_table "forum_categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",       limit: 255
-    t.integer  "position",   limit: 4,   default: 0
   end
 
-  add_index "forem_categories", ["slug"], name: "index_forem_categories_on_slug", unique: true, using: :btree
-
-  create_table "forem_forums", force: :cascade do |t|
-    t.string  "name",        limit: 255
-    t.text    "description", limit: 65535
-    t.integer "category_id", limit: 4
-    t.integer "views_count", limit: 4,     default: 0
-    t.string  "slug",        limit: 255
-    t.integer "position",    limit: 4,     default: 0
+  create_table "forum_comments", force: :cascade do |t|
+    t.string   "comment",       limit: 255
+    t.integer  "user_id",       limit: 4
+    t.integer  "forum_post_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "forem_forums", ["slug"], name: "index_forem_forums_on_slug", unique: true, using: :btree
+  add_index "forum_comments", ["forum_post_id"], name: "index_forum_comments_on_forum_post_id", using: :btree
+  add_index "forum_comments", ["user_id"], name: "index_forum_comments_on_user_id", using: :btree
 
-  create_table "forem_groups", force: :cascade do |t|
-    t.string "name", limit: 255
-  end
-
-  add_index "forem_groups", ["name"], name: "index_forem_groups_on_name", using: :btree
-
-  create_table "forem_memberships", force: :cascade do |t|
-    t.integer "group_id",  limit: 4
-    t.integer "member_id", limit: 4
-  end
-
-  add_index "forem_memberships", ["group_id"], name: "index_forem_memberships_on_group_id", using: :btree
-
-  create_table "forem_moderator_groups", force: :cascade do |t|
-    t.integer "forum_id", limit: 4
-    t.integer "group_id", limit: 4
-  end
-
-  add_index "forem_moderator_groups", ["forum_id"], name: "index_forem_moderator_groups_on_forum_id", using: :btree
-
-  create_table "forem_posts", force: :cascade do |t|
-    t.integer  "topic_id",    limit: 4
-    t.text     "text",        limit: 65535
-    t.integer  "user_id",     limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "reply_to_id", limit: 4
-    t.string   "state",       limit: 255,   default: "approved", null: false
-    t.boolean  "notified",                  default: false
-  end
-
-  add_index "forem_posts", ["reply_to_id"], name: "index_forem_posts_on_reply_to_id", using: :btree
-  add_index "forem_posts", ["state"], name: "index_forem_posts_on_state", using: :btree
-  add_index "forem_posts", ["topic_id"], name: "index_forem_posts_on_topic_id", using: :btree
-  add_index "forem_posts", ["user_id"], name: "index_forem_posts_on_user_id", using: :btree
-
-  create_table "forem_subscriptions", force: :cascade do |t|
-    t.integer "subscriber_id", limit: 4
-    t.integer "topic_id",      limit: 4
-  end
-
-  create_table "forem_topics", force: :cascade do |t|
-    t.integer  "forum_id",     limit: 4
-    t.integer  "user_id",      limit: 4
-    t.string   "subject",      limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "locked",                   default: false,            null: false
-    t.boolean  "pinned",                   default: false
-    t.boolean  "hidden",                   default: false
-    t.datetime "last_post_at"
-    t.string   "state",        limit: 255, default: "pending_review"
-    t.integer  "views_count",  limit: 4,   default: 0
-    t.string   "slug",         limit: 255
-  end
-
-  add_index "forem_topics", ["forum_id"], name: "index_forem_topics_on_forum_id", using: :btree
-  add_index "forem_topics", ["slug"], name: "index_forem_topics_on_slug", unique: true, using: :btree
-  add_index "forem_topics", ["state"], name: "index_forem_topics_on_state", using: :btree
-  add_index "forem_topics", ["user_id"], name: "index_forem_topics_on_user_id", using: :btree
-
-  create_table "forem_views", force: :cascade do |t|
+  create_table "forum_posts", force: :cascade do |t|
+    t.string   "title",             limit: 255
+    t.text     "description",       limit: 65535
     t.integer  "user_id",           limit: 4
-    t.integer  "viewable_id",       limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "count",             limit: 4,   default: 0
-    t.string   "viewable_type",     limit: 255
-    t.datetime "current_viewed_at"
-    t.datetime "past_viewed_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "forum_category_id", limit: 4
+    t.boolean  "is_pin",                          default: false
+    t.boolean  "is_lock",                         default: false
+    t.datetime "last_comment_time",                               null: false
   end
 
-  add_index "forem_views", ["updated_at"], name: "index_forem_views_on_updated_at", using: :btree
-  add_index "forem_views", ["user_id"], name: "index_forem_views_on_user_id", using: :btree
-  add_index "forem_views", ["viewable_id"], name: "index_forem_views_on_viewable_id", using: :btree
+  add_index "forum_posts", ["forum_category_id"], name: "index_forum_posts_on_forum_category_id", using: :btree
+  add_index "forum_posts", ["user_id"], name: "index_forum_posts_on_user_id", using: :btree
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "member_id",       limit: 4,   null: false
@@ -270,25 +205,22 @@ ActiveRecord::Schema.define(version: 20160320034448) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                limit: 255
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
-    t.string   "password_digest",      limit: 255
-    t.string   "remember_digest",      limit: 255
-    t.string   "alias",                limit: 255
-    t.string   "activation_digest",    limit: 255
+    t.string   "email",               limit: 255
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "password_digest",     limit: 255
+    t.string   "remember_digest",     limit: 255
+    t.string   "alias",               limit: 255
+    t.string   "activation_digest",   limit: 255
     t.boolean  "activated"
     t.datetime "activated_at"
-    t.string   "avatar_file_name",     limit: 255
-    t.string   "avatar_content_type",  limit: 255
-    t.integer  "avatar_file_size",     limit: 4
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
-    t.string   "reset_digest",         limit: 255
+    t.string   "reset_digest",        limit: 255
     t.datetime "reset_sent_at"
-    t.boolean  "forem_admin",                      default: false
-    t.string   "forem_state",          limit: 255, default: "pending_review"
-    t.boolean  "forem_auto_subscribe",             default: false
-    t.integer  "user_status_id",       limit: 4,   default: 1
+    t.integer  "user_status_id",      limit: 4,   default: 1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -297,6 +229,9 @@ ActiveRecord::Schema.define(version: 20160320034448) do
   add_foreign_key "admins", "users"
   add_foreign_key "crates", "categories"
   add_foreign_key "crates", "users"
+  add_foreign_key "forum_comments", "forum_posts"
+  add_foreign_key "forum_comments", "users"
+  add_foreign_key "forum_posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "crates"
   add_foreign_key "taggings", "tags"

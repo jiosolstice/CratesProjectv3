@@ -1,0 +1,31 @@
+<h2></h2>
+<div class="ui container">   
+        <table class="ui single line table">
+            <thead>
+            <tr>
+            <th>  
+                <h2 class="header">
+                    <div class="ui large breadcrumb">
+                      <%=link_to 'Discussion Boards', community_path , class: 'section'%>
+                      <div class="divider"> / </div>
+                      <div class="active section"><%=@fcat.name%></div>
+                    </div>
+                </h2>
+           </th>
+            <th>
+                <i class="write icon"></i><%=link_to 'New Post', new_forum_post_path(:forum_category_id => @fcat.id), class: 'item' %>
+            </th>
+            <th></th>
+            </tr>    
+            </thead>
+           <tbody>
+               <%@forum_posts.each do |post| %>
+               <tr>
+                   <td><div class="header"><%=link_to post.title, post , class: 'header' %></div></td>
+                   <td>By: <%=link_to target_user(post.user_id).alias, @target_user%></td>
+                   <td>Created <%=time_ago_in_words(post.created_at)%> ago</td>
+               </tr>
+                <%end%> 
+           </tbody>    
+           </table>       
+</div>

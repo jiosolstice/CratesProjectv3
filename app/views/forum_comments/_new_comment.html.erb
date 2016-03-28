@@ -1,0 +1,7 @@
+<%=form_for(forum_comment,url:{ :controller => 'forum_comments', :action => 'create'},html:{class:'ui reply form'})do|f|%>
+            <div class="field">
+              <%= f.text_area :comment,required: true ,class: 'ui field', :maxlength => 300%>
+              <%= f.hidden_field :user_id, value: current_user.id%>
+            </div>
+        <%= f.submit 'Reply', method: 'post', class: 'ui labeled submit icon button' %>
+<% end %>

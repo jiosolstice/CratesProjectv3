@@ -16,6 +16,8 @@
  *= require_self
  */
 
+
+
 da{
   background: #000 !important;
   color: #0f0 !important;
@@ -37,7 +39,7 @@ vanilla {
 }
 
 .body{
-    background: rgb(243,226,199);
+    background-color: antiquewhite !important;
     width: 100%;
 
 }
@@ -62,6 +64,7 @@ vanilla {
 #masonry{
     max-width: 1500px;
     min-width: 100%;
+    min-height: 1000px;
 }
 
 
@@ -70,16 +73,20 @@ vanilla {
     margin: 7px;
 }
 
-#cratePartial{
-    max-width: inherit;
-    border-width: 1px;
-    border-style: solid;
+#items{
+    display: flex;
+    flex-wrap: wrap;
+  overflow: hidden; /* simple clearfix */
+}
+
+#item{
+    float: left;
+    max-width: 23%;
+    min-width: 200px;
     margin-top: 10px;
-    background-color: bisque;
-    border-color: beige;
-    -webkit-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
-    box-shadow: -1px 11px 14px -5px rgba(0,0,0,0.75);
+    margin: 1% 1% 0 1%;
+    border-color: gainsboro;
+    border-width: 1px;
 }
 
 
@@ -97,12 +104,27 @@ img.display{
     padding: 1em;
 }
 
-@media only screen and (max-width : 933px)
-    
-{
-    .mason-item{
-        margin: 10px;
+@media only screen and (max-width : 723px){
+
+    #items > #item{
+        min-width: 30.67%;
+        margin: 1% 1% 0 1%;
     }
     
+}
+
+@media only screen and (max-width : 480px){
+
+    #items > #item{
+        min-width: 46%;
+        margin: 1% 1% 0 1%;
+    }
     
+}
+
+#error{
+    margin-top: 0px !important;
+}
+td{
+    width: 30% !important;
 }

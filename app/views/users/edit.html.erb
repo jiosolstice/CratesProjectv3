@@ -1,7 +1,7 @@
 <%=provide(:title, @user.alias + " 's Profile - Edit ") %>
   <div class="ui center aligned grid">
    <div class="seven wide column">
-            <header><h1>Edit Account</h1></header>
+            <div class="header"><h1>Edit Account</h1></div>
             <%= form_for(@user,html: {class: "ui large segment form error", multipart: true})  do |f| %>
             <%= render 'shared/form_error_messages', object: f.object %>
             <div class="ui horizontal divider">Login Premises</div>

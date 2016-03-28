@@ -1,0 +1,78 @@
+<div class="ui container">
+   
+   
+   
+    <h1 class="header">
+        <div class="ui large breadcrumb">
+          <%=link_to 'Forum Boards', community_path , class: 'section'%>
+          <div class="divider"> / </div>
+          <%=link_to fcat(@forum_post.forum_category_id).name, @fcat , class: 'section'%>
+          <div class="divider"> / </div>
+          <div class="active section"><%=@forum_post.title%></div>
+        </div>
+    </h1>
+    
+    <div class="ui raised segments">
+       <div class="ui horizontal segments">
+           <div class="ui segment"><p><%=@forum_post.title%></p></div>
+           <div class="ui segment">
+               By <%=link_to target_user(@forum_post.user_id).alias, @target_user%>
+           </div>
+           <%if logged_in?%>
+           <div class="ui segment">
+               
+               <div class="ui label"><%=link_to 'Edit', edit_forum_post_path(@forum_post.id)%></div>
+               
+               <%if admin?%>
+               <div class="ui label"><%=link_to 'Pin', change_pin_path(id: @forum_post.id)%></div>
+               <div class="ui label"><%=link_to 'Lock', change_lock_path(id: @forum_post.id)%></div>
+               <%end%>
+           </div>
+           <%end%>
+        </div>
+       
+        <div class="ui segment">
+            <p><%=simple_format(@forum_post.description)%></p>   
+        </div>
+        
+    </div>
+
+    <div class="ui comments">
+    <h3 class="ui dividing header">Comments</h3>    
+    <%@forum_comments.each do |comment|%>
+       <div class="comment">
+          <div class="avatar">
+           <%=image_tag target_user(comment.user_id).avatar, class:'ui tiny image'%>
+           </div>
+        <div class="content">
+            <%=link_to @target_user.alias, @target_user, class:'author'%>
+          <div class="metadata">
+          <span class="date"><%=time_ago_in_words(comment.created_at)%></span>
+          </div>
+          <div class="text">
+            <%=simple_format(comment.comment)%>
+          </div>
+          <div class="actions">
+            <%if logged_in? && is_owner?(comment.user_id)%>
+            <%=link_to 'Edit', edit_forum_post_forum_comment_path(@forum_post.id,comment.id)%>
+              <%end%>
+          </div>
+        </div>
+      </div>
+    <%end%>
+    <%if logged_in?%>
+        <%=form_for(@forum_comment,url:{controller:'forum_comments', action: 'create'}, html:{class:'ui reply form'})do|f|%>
+                <div class="field">
+                  <%= f.text_area :comment,required: true ,class: 'ui field', :maxlength => 300%>
+                  <%= f.hidden_field :user_id, value: current_user.id%>
+                  <%= f.hidden_field :forum_post_id, value: @forum_post.id%>
+                </div>
+            <%= button_tag(type: 'submit', class: "ui submit labeled icon button") do %>
+                <i class="edit icon"></i> Reply
+            <% end %>
+        <% end %>
+    <% end %>
+    
+    </div>
+    
+</div>

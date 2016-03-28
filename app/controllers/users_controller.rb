@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       if (params.has_key?(:rated_point) && params.has_key?(:id))
         current_user.user_ratings.new(rating_id: params[:rated_point],rated_person: params[:id]).save unless is_rated?(params[:id])
       end
+      @act_crates =  Crate.where(["user_id = ? and active_status_id = ?", @user.id , 1])
   end
     
   def correct_user
@@ -33,7 +34,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # Handle a successful save.
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url

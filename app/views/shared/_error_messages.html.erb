@@ -1,10 +1,10 @@
 <% object.each do |key,value|%>
         <%if value.present?%>
-            <div class="ui container">
-                <div class="ui <%=key%> message">
-                <%=value%><i class="right icon close"></i>
+    
+                <div class="ui <%=key%> message" id="error">
+                <%=value%>
                 </div>
-            </div>   
+                <h1></h1> 
         <%end%>
 <%end%>
 

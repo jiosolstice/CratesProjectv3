@@ -25,14 +25,26 @@
             <%=f.label :price_lteq, 'Max Price' %>
             <%=f.number_field :price_lteq, class:'ui number field',min: '1'%>
         </div>
+            <%=f.hidden_field :active_status_id_eq, :value => 1%>
         <div class="one wide field">
            <label class="hidden">Search</label>
             <%=f.submit 'Search', class: 'ui button'%>
         </div>
+            
+    </div>
+    <div class="fields">
+       <div class="one wide field">Sort by:</div>
+        <div class="one wide field"><%=sort_link @search, :name, 'Name'%></div>
+        <div class="one wide field"><%=sort_link @search, :qualities_id, 'Quality'%></div>
+        <div class="one wide field"><%=sort_link @search, :location_id, 'location'%></div>
+        <div class="two wide field"><%=sort_link @search, :updated_at, 'Posted Time'%></div>
+        <div class="one wide field"><%=sort_link @search, :states_id, 'Status'%></div>
+        <div class="one wide field"><%=sort_link @search, :price, 'Price'%></div>
     </div>
 <%end%>
 <%if params['q'] != nil %>
 <h2>Results: </h2>
 <%end%>
+
 <%= render 'crates/crate_collection', crates: @crates %>
 </div>
