@@ -17,14 +17,18 @@
     <div class="ui top attached menu">
         <%if logged_in?%>
         <a class="item"  id="side_btn"><i class="sidebar icon"></i>Menu</a>
+        <%= link_to @current_user, :class => 'item' do %>
+           <i class="user icon"></i><%=@current_user.alias %>
+        <% end %>
+        <div class="right menu">
         <%else%>
+        <div class="right menu">
         <a class="item"  href="/login"><i class="user icon"></i>Login</a>
         <a class="item"  href="/signup"><i class="write icon"></i>Signup</a>
         <a class="item"  href="/community"><i class="comments outline icon"></i>Discussion Boards</a>
-        <%=link_to 'Market', '/search',class: 'item'%>
+        <a class="item"  href="/search"><i class="shop icon"></i>Market</a>
         <%end%>
-       <div class="right menu">
-       <a class="item"  href="/help"><i class="help icon"></i>About/Help</a>      
+        <a class="item"  href="/help"><i class="help icon"></i>About/Help</a>      
        </div>
     </div>
     <div class="ui thin sidebar inverted vertical menu">

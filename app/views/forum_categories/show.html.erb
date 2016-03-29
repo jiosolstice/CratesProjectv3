@@ -6,7 +6,7 @@
             <th>  
                 <h2 class="header">
                     <div class="ui large breadcrumb">
-                      <%=link_to 'Discussion Boards', community_path , class: 'section'%>
+                      <%=link_to 'Forum', community_path , class: 'section'%>
                       <div class="divider"> / </div>
                       <div class="active section"><%=@fcat.name%></div>
                     </div>
@@ -21,7 +21,12 @@
            <tbody>
                <%@forum_posts.each do |post| %>
                <tr>
-                   <td><div class="header"><%=link_to post.title, post , class: 'header' %></div></td>
+                   <td><div class="header">
+                   <%if is_pinned?(post.id)%>
+                           <i class="pin icon"></i>
+                       <%end%>
+                   <%=link_to post.title, post , class: 'header' %>
+                   </div></td>
                    <td>By: <%=link_to target_user(post.user_id).alias, @target_user%></td>
                    <td>Created <%=time_ago_in_words(post.created_at)%> ago</td>
                </tr>

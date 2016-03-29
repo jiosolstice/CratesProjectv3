@@ -16,5 +16,9 @@ module ApplicationHelper
         @current_user.id == user_id
     end
     
+    def is_pinned?(post_id)
+        ForumPost.find(post_id).is_pin?
+    end
+    
     
 end

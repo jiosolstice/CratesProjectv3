@@ -6,14 +6,16 @@ class CratesController < ApplicationController
     rescue_from ::ActiveRecord::InvalidForeignKey, with: :dont_url_manipulate
 
     def index
-        @crates = Crate.where(:active_status_id => '1')
+        @crates = Crate.where(:active_status_id => '1').page(params[:page]).per(10)
         @search = Crate.where(:active_status_id => '1').ransack(params[:q])
         if params.has_key?(:name)
-            @crates = Crate.find_by(name:params[:name])
+            @crates = Crate.find_by(name:params[:name]).page(params[:page]).per(10)
         elsif params[:tag]
-            @crates = Crate.tagged_with(params[:tag]).where(:active_status_id => '1')
+            @crates = Crate.tagged_with(params[:tag]).where(:active_status_id => '1').page(params[:page]).per(10)
         elsif params[:q]
-            @crates = @search.result 
+            
+            
+            @crates = @search.result.page(params[:page]).per(10)
         end       
     end
     

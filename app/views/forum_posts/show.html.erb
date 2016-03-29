@@ -4,7 +4,7 @@
    
     <h1 class="header">
         <div class="ui large breadcrumb">
-          <%=link_to 'Forum Boards', community_path , class: 'section'%>
+          <%=link_to 'Forum', community_path , class: 'section'%>
           <div class="divider"> / </div>
           <%=link_to fcat(@forum_post.forum_category_id).name, @fcat , class: 'section'%>
           <div class="divider"> / </div>
@@ -30,7 +30,7 @@
            </div>
            <%end%>
         </div>
-       
+
         <div class="ui segment">
             <p><%=simple_format(@forum_post.description)%></p>   
         </div>
