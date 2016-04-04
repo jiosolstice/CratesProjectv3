@@ -1,11 +1,5 @@
 class ForumCommentsController < ApplicationController
-    before_action :logged_in_user, only: [:create, :new, :edit, :update]
-    
-    
-    def new
-        @forum_post = ForumPost.find(params[:forum_post_id])
-        @forum_comment =  @forum_post.forum_comments.build
-    end
+    before_action :logged_in_user, only: [:create, :edit, :update]
     
     def create
         @forum_post = ForumPost.find(params[:forum_comment][:forum_post_id])

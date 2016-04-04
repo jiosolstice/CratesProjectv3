@@ -43,9 +43,7 @@ vanilla {
     width: 100%;
 
 }
-*{
-    border-radius: 0px !important;
-}
+
 #content{
     width: 100%;
 }
@@ -58,7 +56,6 @@ vanilla {
     visibility: hidden;
     
 }
-
 /* masonry use */
 
 #masonry{
@@ -76,7 +73,7 @@ vanilla {
 #items{
     display: flex;
     flex-wrap: wrap;
-  overflow: hidden; /* simple clearfix */
+    overflow: hidden; /* simple clearfix */
 }
 
 #item{

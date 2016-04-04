@@ -1,4 +1,4 @@
-<%=content_for :title, 'Crate' %>
+<%=content_for :title, @crate.name %>
 <h2></h2>
 <div class="ui container">
         <div class="ui <%=find_state_color @crate.states_id%> label raised segment" id="status_tag">
@@ -30,7 +30,7 @@
                     <div class="description">
                                <h4>
                                Details:
-                               <p><%= simple_format(@crate.description) %></p></h4>
+                               <p><%=simple_format(@crate.description) %></p></h4>
                     </div>
                     <div class="meta">
                         <div class="ui label">Tags: <%=raw tag_links(@crate.all_tags)%></div>
@@ -49,7 +49,35 @@
                     </div>
                 <%end%>
             
-      
-    </div>
+            
+            
+            <div class="ui comments">
+            <h3 class="ui dividing header">Queries</h3>    
+            <%@queries.each do |query|%>
+               <div class="comment">
+                  <div class="avatar">
+                    <%user= query.user%>
+                    <%=image_tag user.avatar, class:'ui tiny image'%>
+                   </div>
+                <div class="content">
+                  <%=link_to user.alias, user, class:'author'%>
+                  asked
+                  <%= query.title %>
+                  <div class="metadata">
+                    <span class="date"><%=time_ago_in_words(query.created_at)%> ago</span>
+                  </div>
+                  <div class="text">
+                  <%=simple_format(query.description)%>
+                  </div>
+                  <div class="actions">
+                    <%#if logged_in? && is_owner?(comment.user_id)%>
+                    <%#=link_to 'Edit', edit_forum_post_forum_comment_path(@forum_post.id,comment.id)%>
+                    <%#end%>
+                  </div>
+                </div>
+              </div>
+            <%end%>
+            <%=render 'queries/query_form', query: @query %>
 
-
+           </div>
+</div>

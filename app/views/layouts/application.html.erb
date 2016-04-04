@@ -34,7 +34,7 @@
     <div class="ui thin sidebar inverted vertical menu">
         <%=render 'layouts/sidebar' if logged_in?%>
     </div>
-     <%=(render 'shared/error_messages', object: flash)%>
+     <%=render 'shared/error_messages', object: flash%>
      <div id="content">
       <div class="ui loader" id='loader'></div>
       <%=yield%>    

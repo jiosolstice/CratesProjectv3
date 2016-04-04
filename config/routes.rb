@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     root 'pages#home'
     get 'fam' => 'admins#show', as: 'admin'
     get 'signup' => 'users#new'
+    get 'crate_manager' => 'pages#crate_manager'
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
@@ -20,7 +21,11 @@ Rails.application.routes.draw do
     end
     
     resources :groups, only: [:show,:index]
+    
     resources :crates
+    
+    resources :queries, only: [:create,:update]
+    
     resources :account_activations, only: [:edit]
     resources :password_resets, only: [:new, :create, :edit, :update]
     resources :reports, only: [:create,:destroy,:show,:index]
@@ -29,4 +34,6 @@ Rails.application.routes.draw do
         resources :forum_comments, only: [:new,:create,:destroy,:edit,:update] 
     end
     resources :forum_comments, only: [:new,:create,:destroy,:edit,:update] 
+    
+    
 end

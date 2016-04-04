@@ -20,16 +20,7 @@
             </thead>
            <tbody>
                <%@forum_posts.each do |post| %>
-               <tr>
-                   <td><div class="header">
-                   <%if is_pinned?(post.id)%>
-                           <i class="pin icon"></i>
-                       <%end%>
-                   <%=link_to post.title, post , class: 'header' %>
-                   </div></td>
-                   <td>By: <%=link_to target_user(post.user_id).alias, @target_user%></td>
-                   <td>Created <%=time_ago_in_words(post.created_at)%> ago</td>
-               </tr>
+                <%=render 'shared/forum_post', post: post%>
                 <%end%> 
            </tbody>    
            </table>       

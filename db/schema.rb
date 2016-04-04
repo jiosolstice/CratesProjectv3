@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327065046) do
+ActiveRecord::Schema.define(version: 20160403055833) do
 
   create_table "active_statuses", force: :cascade do |t|
     t.string "name", limit: 255
@@ -147,11 +147,34 @@ ActiveRecord::Schema.define(version: 20160327065046) do
 
   add_index "qualities", ["name"], name: "index_qualities_on_name", using: :btree
 
+  create_table "queries", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "user_id",     limit: 4
+    t.integer  "crate_id",    limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "queries", ["crate_id"], name: "index_queries_on_crate_id", using: :btree
+  add_index "queries", ["user_id"], name: "index_queries_on_user_id", using: :btree
+
   create_table "ratings", force: :cascade do |t|
     t.string   "rating_name", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "replies", force: :cascade do |t|
+    t.text     "body",       limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.integer  "query_id",   limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "replies", ["query_id"], name: "index_replies_on_query_id", using: :btree
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.text     "description", limit: 65535
@@ -233,6 +256,10 @@ ActiveRecord::Schema.define(version: 20160327065046) do
   add_foreign_key "forum_comments", "users"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "queries", "crates"
+  add_foreign_key "queries", "users"
+  add_foreign_key "replies", "queries"
+  add_foreign_key "replies", "users"
   add_foreign_key "taggings", "crates"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_ratings", "ratings"

@@ -1,99 +1,44 @@
-<h3></h3>
-   <div class="ui container">
-       <%=image_tag @current_user.avatar.url, class: 'ui float left tiny image'%>
-     Currently Logged in : <%=@current_user.alias%>
-     <br>
-     Contact Number: <%=@current_user.profile.phone_number unless nil%> 
-      <ul>
-         <div class="header">Crates</div>
-          <li>Active: <%=@active_crates.size%></li>
-          <li>Inactive: <%=@inactive_crates.size%></li>
-          <li>Archived: <%=@fin_crates.size%></li>
-          <li>Total: <%=@active_crates.size + @inactive_crates.size + @fin_crates.size%> </li>
-      </ul>     
-      
-      <div class="home box">
-        <table class="ui compact table">
-         <thead>
-            <tr>
-                <th>Active Crates</th>
-                <th>Action</th>
-            </tr>
-         </thead>
-         <tbody>
-            <%@active_crates.each do |crate| %>
-              <tr>
-                  <td><%=link_to crate.name, crate , class: 'item'%></td>
-                  <td>
-                  <% unless crate == '' || crate == nil %>
-                     <%=link_to 'Inactivate',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 2%> 
-                       |  
-                      <%=link_to 'Archive',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 3%> 
-                  <%end%>
-                  </td>
-              </tr>
-          <%end%>
-            
-         </tbody>
-     </table>
-     
-        <table class="ui compact table">
-         <thead>
-            <tr>
-                <th>Inactive Crates</th>
-                <th>Action</th>
-            </tr>
-         </thead>
-         <tbody>
-            <%@inactive_crates.each do |crate| %>
-              <tr>
-                  <td><%=link_to crate.name, crate , class: 'item'%></td>
-                  <td>
-                  <% unless crate == '' || crate == nil %>
-                     <%=link_to 'Activate',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 1%>
-                  <%end%>
-                  </td>
-              </tr>
-          <%end%>
-            
-         </tbody>
-     </table>
-     
-        <table class="ui compact table">
-         <thead>
-            <tr>
-                <th>Archived Crates</th>
-                <th>Action</th>
-            </tr>
-         </thead>
-         <tbody>
-            <%@fin_crates.each do |crate| %>
-              <tr>
-                  <td><%=link_to crate.name, crate , class: 'item'%></td>
-                  <td>
-                  <% unless crate == '' || crate == nil %>
-                     <%=link_to 'Activate',:controller =>'pages',:action => 'home', :crate_id => crate.id, :active_id => 1%>
-                  <%end%>
-                  </td>
-              </tr>
-          <%end%>
-            
-         </tbody>
-    </table>
+<h3></h3>        
+<div class="profile container">
+      <div class="ui centered grid" style="margin:20px">
+        <div class="row">
+            <div class="ui blue column" style="height:200px;width:200px">
+                <div id="avatar" class="ui circular image">
+                    <%=image_tag @current_user.avatar.url(:medium), class: 'ui circular image'%>
+                </div>
+            </div>
+            <div class="ui six wide red column">
+                <div class="ui items item">
+                  <div class="item">
+                    <div class="content">
+                        <div class="header">Currently Logged in : <%=@current_user.alias%></div>
+                        <div class="meta">
+                          <span>
+                            Contact Number: <%=@current_user.profile.phone_number unless nil%> 
+                            <div class="ui right floated">Date</div>
+                          </span>
+                        </div>
+                        <div class="description">
+                            <p><%=link_to 'Manage Crates', crate_manager_path %></p>
+                            <p>Info 2</p>
+                            <p>Info 3</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="two column row">
+           <ul>
+             <div class="header">Crates</div>
+              <li>Active: <%=@active_crates.size%></li>
+              <li>Inactive: <%=@inactive_crates.size%></li>
+              <li>Archived: <%=@fin_crates.size%></li>
+              <li>Total: <%=@active_crates.size + @inactive_crates.size + @fin_crates.size%> </li>
+           </ul>
+        </div>
       </div>
-      
-     
-     
-     
-     
-     
-     
-</div>  
-<h1></h1>
-      
-      
-      
-      
+    </div>
       
    
 

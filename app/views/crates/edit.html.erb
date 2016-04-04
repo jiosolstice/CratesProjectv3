@@ -1,7 +1,7 @@
 <div class="ui container">
-<%= form_for(@crate,html: {class: "ui inline form error"}) do |f| %>
+<%= form_for(@crate,html: {class: "ui inline form error",multipart: true}) do |f| %>
 <div class="ui field">
-  <!--- -->
+ <%=render 'shared/form_error_messages', object: f.object %>
   <div class="ui field">
      <label>Name</label>
      <%= f.text_field :name ,required: true,class: 'ui field'%>
@@ -9,7 +9,7 @@
      <%= f.text_area :description,required: true ,class: 'ui field'%>
      <label>Price</label>
       PHP <%= f.number_field :price,required: true,class: 'ui field', min: '0', max:'999.999.999.99'%>
-      <label>Tags</label>
+      <label>Tags (Limit of 5)</label>
       <%=f.text_field :all_tags, placeholder: "Tags Separated with comma"%>
   </div>
   <!--- -->
@@ -41,14 +41,19 @@
       <%= f.collection_select(:category_id,Category.all, :id, :name) %>
   </div>
 </div>
-    <% @pictures.each do |pic| %>
+
+       <div class="ui inline field"> 
+     <label>Picture (Limit of 5)</label>
+      <%= file_field_tag "pictures[]", type: :file, multiple:true, accept:'image/*'%>
+     </div>
+      
+   <div class="ui inline field">
+    <%@pictures.each do |pic| %>
        <div class="ui image">
             <%= image_tag pic.image.url %>   
        </div>
     <%end%>
-
+    </div>
 <%= f.submit "Edit Crate", class: "ui primary button" %>
 <% end %>
-
-
 </div>

@@ -1,5 +1,5 @@
-<div id="cratePartial">
-        <div class="ui card">
+
+        <div class="ui card" id="cratePartial">
          <div class="extra content">
              <div class="ui left floated">
                     <div class="ui <%=find_state_color crate.states_id%> label raised segment" id="status_tag">
@@ -8,12 +8,13 @@
                 </div>
          </div>
          
-          <div class="image">
+          <div class="small image">
               <%=image_tag show_thumb(crate.pictures.first), class: 'ui small image' if crate.pictures.first != nil%>
           </div>
-          
           <div class="content">
-              <div class="header"><%=link_to crate.name,crate%></div>
+             <div class="header">
+              <h4><%=link_to crate.name,crate%></h4>
+               </div>
                 <div class="meta">
                  <div class="timestamp">Posted <%= time_ago_in_words(crate.created_at) %> ago.</div>
                 </div>
@@ -31,7 +32,6 @@
                 <div class="tag"><i class="cube icon"></i><%=crate_quality(crate.qualities_id)%></div>
                 <div class="tag"><%=catgory(crate.category_id)%></div>
           </div>
-       </div>
 </div>
 
 

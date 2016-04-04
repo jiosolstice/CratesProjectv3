@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
-     
+
   def check_auth
         unless admin?
             flash[:error] = "Invalid Action"

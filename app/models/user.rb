@@ -16,17 +16,21 @@ class User < ActiveRecord::Base
     has_many :reports, through: :reportables
     has_many :forum_posts
     has_many :forum_comments
+    has_many :queries
+    has_many :replies, through: :queries
     
     #avatar
     has_attached_file :avatar, styles: {
             :small => { :geometry => "100x100!" },
-            :medium => { :geometry => "300x300!"} 
-        }, default_url: "/images/:style/missing_:style.png"
+            :medium => { :geometry => "300x300!"} },
+            default_url: "/images/:style/missing_:style.png",
+            size: { in: 0..300.kilobytes }
+    
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
     #Validation
     validates :password, presence: true, length: { minimum: 6 , maximum: 32}, allow_nil: true
     validates :email, presence:true, length:{maximum: 255}, uniqueness:{case_sensitive: false}
-    validates :alias, presence:true, length:{maximum: 50}, uniqueness:{case_sensitive: true}
+    validates :alias, presence:true, length:{maximum: 15}, uniqueness:{case_sensitive: true}
     
     #others
     default_scope {order('users.alias ASC')}

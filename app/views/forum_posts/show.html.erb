@@ -1,7 +1,4 @@
 <div class="ui container">
-   
-   
-   
     <h1 class="header">
         <div class="ui large breadcrumb">
           <%=link_to 'Forum', community_path , class: 'section'%>
@@ -11,7 +8,6 @@
           <div class="active section"><%=@forum_post.title%></div>
         </div>
     </h1>
-    
     <div class="ui raised segments">
        <div class="ui horizontal segments">
            <div class="ui segment"><p><%=@forum_post.title%></p></div>
@@ -20,9 +16,7 @@
            </div>
            <%if logged_in?%>
            <div class="ui segment">
-               
-               <div class="ui label"><%=link_to 'Edit', edit_forum_post_path(@forum_post.id)%></div>
-               
+               <div class="ui label"><%=link_to 'Edit', edit_forum_post_path(@forum_post.id)%></div>         
                <%if admin?%>
                <div class="ui label"><%=link_to 'Pin', change_pin_path(id: @forum_post.id)%></div>
                <div class="ui label"><%=link_to 'Lock', change_lock_path(id: @forum_post.id)%></div>
@@ -36,7 +30,6 @@
         </div>
         
     </div>
-
     <div class="ui comments">
     <h3 class="ui dividing header">Comments</h3>    
     <%@forum_comments.each do |comment|%>
@@ -47,7 +40,7 @@
         <div class="content">
             <%=link_to @target_user.alias, @target_user, class:'author'%>
           <div class="metadata">
-          <span class="date"><%=time_ago_in_words(comment.created_at)%></span>
+          <span class="date"><%=time_ago_in_words(comment.created_at)%> ago</span>
           </div>
           <div class="text">
             <%=simple_format(comment.comment)%>
@@ -60,7 +53,8 @@
         </div>
       </div>
     <%end%>
-    <%if logged_in?%>
+    
+    <%if logged_in? && !@forum_post.is_lock?%>
         <%=form_for(@forum_comment,url:{controller:'forum_comments', action: 'create'}, html:{class:'ui reply form'})do|f|%>
                 <div class="field">
                   <%= f.text_area :comment,required: true ,class: 'ui field', :maxlength => 300%>
