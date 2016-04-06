@@ -15,11 +15,10 @@
 <body id="body">
    
     <div class="ui top attached menu">
+        
         <%if logged_in?%>
         <a class="item"  id="side_btn"><i class="sidebar icon"></i>Menu</a>
-        <%= link_to @current_user, :class => 'item' do %>
-           <i class="user icon"></i><%=@current_user.alias %>
-        <% end %>
+        <a class="item" href="/"><b><i class="home icon"></i>Home</b></a>
         <div class="right menu">
         <%else%>
         <div class="right menu">
@@ -30,6 +29,7 @@
         <%end%>
         <a class="item"  href="/help"><i class="help icon"></i>About/Help</a>      
        </div>
+       
     </div>
     <div class="ui thin sidebar inverted vertical menu">
         <%=render 'layouts/sidebar' if logged_in?%>
@@ -43,11 +43,12 @@
          <h1></h1>
          <h1></h1>
   
-    <div class="script">
+    
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
      <script>
-                             
+        $('.re.ui.reply.form').hide();
+         
         $('.ui.dropdown').dropdown();
         
          $('#side_btn').on('click', function(){
@@ -56,11 +57,9 @@
            ;    
          })
          
-    
-         $('#dash_tab .item').tab();
-             
-            
-    
+         $('.reply').on("click", function(){
+                $(this).parent().parent().parent().children('.comments').children('.re.ui.reply.form').toggle();
+         });
     </script>
     </div>
 </body>

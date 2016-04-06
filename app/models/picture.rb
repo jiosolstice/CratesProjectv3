@@ -9,7 +9,7 @@ class Picture < ActiveRecord::Base
     default_url: "/images/:style/missing.png"
     
     
-   validates :image, :attachment_content_type => { :content_type => ['image/png', 'image/jpg']}
+   validates :image, :attachment_content_type => { :content_type => ['image/png', 'image/jpg','image/jpeg']}
    #do_not_validate_attachment_file_type :image
     
 end

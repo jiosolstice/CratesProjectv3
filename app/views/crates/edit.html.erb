@@ -47,13 +47,17 @@
       <%= file_field_tag "pictures[]", type: :file, multiple:true, accept:'image/*'%>
      </div>
       
-   <div class="ui inline field">
-    <%@pictures.each do |pic| %>
+     <div class="ui inline field">
+    
+    <%@pics.each do |pic| %>
        <div class="ui image">
             <%= image_tag pic.image.url %>   
        </div>
     <%end%>
     </div>
+    
 <%= f.submit "Edit Crate", class: "ui primary button" %>
 <% end %>
+<div class="ui inline field">
+    </div>
 </div>

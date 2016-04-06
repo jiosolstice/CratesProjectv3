@@ -51,10 +51,10 @@
             
             
             
-            <div class="ui comments">
+            <div class="ui threaded comments">
             <h3 class="ui dividing header">Queries</h3>    
             <%@queries.each do |query|%>
-               <div class="comment">
+               <div class=" comment">
                   <div class="avatar">
                     <%user= query.user%>
                     <%=image_tag user.avatar, class:'ui tiny image'%>
@@ -70,14 +70,42 @@
                   <%=simple_format(query.description)%>
                   </div>
                   <div class="actions">
-                    <%#if logged_in? && is_owner?(comment.user_id)%>
-                    <%#=link_to 'Edit', edit_forum_post_forum_comment_path(@forum_post.id,comment.id)%>
-                    <%#end%>
+                    <a class="reply">Reply</a>
                   </div>
                 </div>
+                <!--  add reply model!-->
+                <div class="comments">
+                    <%query.replies.all.each do |reply|%>
+                  <div class="comment">
+                    <a class="avatar">
+                    <%=image_tag reply.user.avatar, class:'ui tiny image'%>
+                    </a>
+                    <div class="content">
+                        <%=link_to reply.user.alias, reply.user, class: 'author'%>
+                      <div class="metadata">
+                          <span class="date"><%=time_ago_in_words(reply.created_at)%> ago</span>
+                      </div>
+                      <div class="text">
+                          <%=simple_format(reply.body)%>
+                      </div>
+                    </div>
+                  </div>
+                   <%end%>
+                <%=form_for(@reply,url:{controller:'replies',action: 'create'}, html:{class:'re ui reply form'})do|f|%>
+                <div class="field">
+                    <%= f.text_area :body ,class: 'ui field', id:'reply_area'%>
+                    <%= f.hidden_field :query_id, value: query.id%>
+                </div>
+                <%= button_tag(type: 'submit', class: "ui small submit labeled icon button") do %>
+                <i class="edit icon"></i> Reply
+                <% end %>
+                <%end%>
+                </div>
+                
               </div>
             <%end%>
             <%=render 'queries/query_form', query: @query %>
-
            </div>
 </div>
+
+

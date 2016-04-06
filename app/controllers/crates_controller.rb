@@ -2,8 +2,8 @@ class CratesController < ApplicationController
     before_action :logged_in_user, only: [:create, :destroy, :edit]
     before_action :correct_crate,   only: [:destroy, :edit, :update]
     before_action :add_profile, only: [:new,:create]
-    #rescue_from ::ActiveRecord::RecordNotFound, with: :dont_url_manipulate
-    #rescue_from ::ActiveRecord::InvalidForeignKey, with: :dont_url_manipulate
+    rescue_from ::ActiveRecord::RecordNotFound, with: :dont_url_manipulate
+    rescue_from ::ActiveRecord::InvalidForeignKey, with: :dont_url_manipulate
 
     def index
         @crates = Crate.where(:active_status_id => '1').page(params[:page]).per(12)
@@ -46,13 +46,14 @@ class CratesController < ApplicationController
     
     def edit
         @crate = Crate.find(params[:id])
-        @pictures = Picture.where(crate_id: params[:id])
+        @pics = @crate.pictures
     end
     
     def update
         @crate = Crate.find(params[:id])
+        @pics = @crate.pictures
         if @crate.update_attributes(crate_params)
-            if params[:pictures]   
+            if params[:pictures]
                 params[:pictures].each { |image|
                  @crate.pictures.create(image: image)
                 }
@@ -62,6 +63,7 @@ class CratesController < ApplicationController
             flash[:success] = 'Crate updated'
             redirect_to @crate
         else
+            
             render 'edit'
         end
     end
@@ -78,6 +80,7 @@ class CratesController < ApplicationController
         @contact = @crate.user.profile.phone_number        
         @query = @crate.queries.build
         @queries = @crate.queries.all
+        @reply = Reply.new
     end
        
     private
