@@ -1,0 +1,11 @@
+<div class="ui container">
+    <%= form_for(@forum_comment,url:{:controller => 'forum_comments', :action => 'update'},html: {class: "ui inline form error"}) do |f| %>
+    <div class="ui field">
+      <div class="ui field">
+         <label>Comment: </label>     
+        <%= f.text_area :comment,required: true ,class: 'ui field', :maxlength => 300%>
+      </div> 
+        <%= f.submit 'Update',class: 'ui primary button' %>
+    <% end %>
+    </div>
+</div>

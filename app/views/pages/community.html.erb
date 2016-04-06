@@ -1,36 +1,21 @@
-
-
+<h2></h2>
 <div class="ui container">
-    <h1>Welcome to the Community!</h1>
-    
-    <div class="ui raised segment">
-        Explore Users
+   <div class="ui relaxed divided list">
+        <%@forum_cat.each do |categ| %>
+           <table class="ui single line table">
+            <thead>
+            <tr>
+            <th><h2 class="header"><%=link_to categ.name, categ%></h2> </th>
+            <th></th>
+            <th></th>
+            </tr>    
+            </thead>
+           <tbody>
+              <%postings(categ.id).by_last_comment.each do |post| %>
+               <%=render 'shared/forum_post', post: post%>
+                <%end%>
+           </tbody>    
+           </table>
+        <%end%>
     </div>
-    <div class="ui container" id="userContainer">
-    <% if @users.empty? %>
-       <%='No Crate Found'%>
-    <%else%>
-       <div class="ui cards">
-        <% @users.each do |user|%>
-            <div class="card" style="width: 100px">               
-                <%=image_tag user.avatar.url(:small), style: "height: 100px;width: 100px"%>
-                <%=link_to user.alias, user, class:'content'%>        
-            </div>
-        <% end %>
-        </div>
-    <% end %>
-    </div>
-    <div class="ui raised segment">
-        Explore BuyNSell Groups!
-    </div>
-    
-    <div class="ui cards">
-        <% @groups.each do |group|%>
-            <div class="card" style="width: 100px">          
-                <div class="header"><%=link_to group.name, group%></div>
-            </div>
-        <% end %>
-    </div>
-    
-    
 </div>

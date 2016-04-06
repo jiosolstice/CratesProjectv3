@@ -15,9 +15,7 @@ module CratesHelper
     def crate_quality(quality_id)
         Quality.find_by_id(quality_id).name
     end
-    def is_owner?(user_id)
-        @current_user.id == user_id
-    end
+    
     def locate(locate_id)
         Location.find_by_id(locate_id).name
     end 

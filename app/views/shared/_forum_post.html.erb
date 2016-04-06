@@ -1,0 +1,11 @@
+               <tr>
+                   <td>
+                       <div class="header">
+                        <%= '<i class="pin icon"></i>'.html_safe if post.is_pin?%>
+                        <%= '<i class="lock icon"></i>'.html_safe if post.is_lock?%>
+                       <%=link_to post.title, post , class: 'header'%>
+                       </div>
+                    </td>
+                   <td>By: <%=link_to target_user(post.user_id).alias, @target_user%></td>
+                   <td><%=time_ago_in_words(post.created_at)%> ago</td>
+               </tr>

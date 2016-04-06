@@ -1,34 +1,51 @@
-
-
-
-<div class="ui container">
-
-    <div class="ui top attached tabular menu" id="dash_tab">
-      <a class="item active" data-tab="all_crates">All Crates</a>
-      <a class="item" data-tab="act_crates">Active Crates</a>
-      <a class="item" data-tab="inact_crates">Inactive Crates</a>
-      <a class="item" data-tab="fin_crates">Finished Crates</a>
+<h3></h3>        
+<div class="profile container">
+      <div class="ui centered grid" style="margin:20px">
+        <div class="row">
+            <div class="ui blue column" style="height:200px;width:200px">
+                <div id="avatar" class="ui circular image">
+                    <%=image_tag @current_user.avatar.url(:medium), class: 'ui circular image'%>
+                </div>
+            </div>
+            <div class="ui six wide red column">
+                <div class="ui items item">
+                  <div class="item">
+                    <div class="content">
+                        <div class="header">Currently Logged in : <%=@current_user.alias%></div>
+                        <div class="meta">
+                          <span>
+                            Contact Number: <%=@current_user.profile.phone_number unless nil%> 
+                            <div class="ui right floated">Date</div>
+                          </span>
+                        </div>
+                        <div class="description">
+                            <p><%=link_to 'Manage Crates', crate_manager_path %></p>
+                            <p>Info 2</p>
+                            <p>Info 3</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="two column row">
+           <ul>
+             <div class="header">Crates</div>
+              <li>Active: <%=@active_crates.size%></li>
+              <li>Inactive: <%=@inactive_crates.size%></li>
+              <li>Archived: <%=@fin_crates.size%></li>
+              <li>Total: <%=@active_crates.size + @inactive_crates.size + @fin_crates.size%> </li>
+           </ul>
+        </div>
+      </div>
     </div>
-    
-    <div class="ui bottom attached segment" id="dash_cont">
       
-        <div class="ui tab" data-tab="all_crates">
-              
-        </div>
-        <div class="ui tab" data-tab="act_crates">
-            <%= render 'crates/crate_collection', crates: @active_crates %>
-        </div>
-        
-        <div class="ui tab" data-tab="inact_crates">
-            <%= render 'crates/crate_collection', crates: @inactive_crates %>
-        </div>
-        <div class="ui tab" data-tab="fin_crates">
-              
-        </div>
-        
-        
-    </div>
+   
+
     
-</div>
+     
+  
+
+
 
 

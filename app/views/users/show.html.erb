@@ -2,8 +2,8 @@
 
    <div class="ui container">
     
-     <div class="ui stackable three column grid" id="grid">
-         <div class="one column" id="col1">
+     
+         
            <div class="ui card">
          <div class="extra content">
              <div class="ui right floated">
@@ -15,7 +15,6 @@
                     </div>
                 </div>
          </div>
-         
           <div class="image">
               <%=image_tag @user.avatar.url(:medium) ,class: 'ui medium image'%>
           </div>
@@ -50,12 +49,11 @@
                <%end%>
           <% end %>
        </div>      
-         </div>
-         <div class="two column" id="col2">         
-             <%=render 'crates/crate_collection', crates: @user.crates %>
-
-         </div>
-     </div> 
+    
+        
+              
+       <%=render 'crates/crate_collection', crates: @act_crates %>
+   
      
     <%if has_permission?(@user) %>
       <div class="ui label">
@@ -69,7 +67,7 @@
 
 <div class="ui closable basic modal" id="reportModal">
     <%=render 'shared/report_form', user: @user %>
-</div>
+</div>    
 
 
 

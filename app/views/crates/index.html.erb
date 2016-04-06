@@ -10,6 +10,10 @@
             <%= f.select :qualities_id_eq, options_from_collection_for_select(Quality.all, 'id', 'name', @search.qualities_id), {include_blank: 'Any'},{ class: 'ui fluid dropdown field'}%>
         </div>
         <div class="two wide field">
+               <label>Category</label>
+            <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, 'id', 'name', @search.category_id), {include_blank: 'Any'},{ class: 'ui fluid dropdown field'} %>
+        </div>
+        <div class="two wide field">
                <label>Location</label>
             <%= f.select :locations_id_eq, options_from_collection_for_select(Location.all, 'id', 'name', @search.locations_id), {include_blank: 'Any'},{ class: 'ui fluid dropdown field'} %>
         </div>
@@ -25,14 +29,30 @@
             <%=f.label :price_lteq, 'Max Price' %>
             <%=f.number_field :price_lteq, class:'ui number field',min: '1'%>
         </div>
+            <%=f.hidden_field :active_status_id_eq, :value => 1%>
         <div class="one wide field">
            <label class="hidden">Search</label>
             <%=f.submit 'Search', class: 'ui button'%>
         </div>
+            
+    </div>
+    <div class="fields">
+       <div class="one wide field">Sort by:</div>
+        <div class="one wide field"><%=sort_link @search, :name, 'Name'%></div>
+        <div class="one wide field"><%=sort_link @search, :qualities_id, 'Quality'%></div>
+        <div class="two wide field"><%=sort_link @search, :created_at, 'Posted Time'%></div>
+        <div class="one wide field"><%=sort_link @search, :states_id, 'Status'%></div>
+        <div class="one wide field"><%=sort_link @search, :price, 'Price'%></div>
     </div>
 <%end%>
 <%if params['q'] != nil %>
 <h2>Results: </h2>
 <%end%>
-<%= render 'crates/crate_collection', crates: @crates %>
+    <%=paginate @crates%>
+    <%=render 'crates/crate_collection', crates: @crates %>
+    <h1></h1>
+    <%=paginate @crates%>
+    <h1></h1>
 </div>
+
+

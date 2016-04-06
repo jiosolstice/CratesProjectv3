@@ -2,16 +2,16 @@
    <div class="item">
        <div class="content">
          <div class="meta">
-             <div class="ui fields">
+             <div class="ui inline fields">
                  <div class="ui field">
-                     <%=link_to target_user(report.reporter).alias, @target_user %>
+                     Reporter :<%=link_to target_user(report.reporter).alias, @target_user %>
                  </div>
                  <div class="ui field">  
-                     <%=link_to target_user(report.reported_id).alias, target_user(report.reported_id)%>        
+                     Reported :<%=link_to target_user(report.reported_id).alias, target_user(report.reported_id)%>        
                  </div>
              </div>
              <div class="description">
-                 <%=report.description%>
+                 Details: <%=report.description%>
              </div>    
          </div>
        </div>

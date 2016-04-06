@@ -5,8 +5,9 @@ class AdminsController < ApplicationController
     def show
         @reports = Report.all
         @admins = Admin.all
-        
-        
+    end
+    
+    def destroy
         
     end
     
@@ -22,8 +23,5 @@ class AdminsController < ApplicationController
         user = User.find(user_id)
         user.update_attributes(user_status_id: 2)
     end
-    
-    
-    
     
 end

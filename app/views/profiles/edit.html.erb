@@ -4,7 +4,7 @@
         <%= form_for(@profile,url:{ :controller => 'profiles', :action => 'update'},html: {class: "ui large segment form error"})  do |f| %>
         <%= render 'shared/form_error_messages', object: f.object%>
             <div class="ui horizontal divider">Create a Profile</div>
-            <div class="inline field">
+            <div class="field">
                 <%= f.text_field :first_name, :placeholder => "First Name" , :required => true%>
                 <%= f.text_field :middle_name, :placeholder => "Middle Name" , :required => true%>
                 <%= f.text_field :last_name, :placeholder => "Last Name" , :required => true%>

@@ -17,29 +17,37 @@
     <div class="ui top attached menu">
         <%if logged_in?%>
         <a class="item"  id="side_btn"><i class="sidebar icon"></i>Menu</a>
-        <%=link_to 'Forums', forem.root_path, class: 'item'%> 
+        <%= link_to @current_user, :class => 'item' do %>
+           <i class="user icon"></i><%=@current_user.alias %>
+        <% end %>
+        <div class="right menu">
         <%else%>
+        <div class="right menu">
         <a class="item"  href="/login"><i class="user icon"></i>Login</a>
-        <a class="item"  href="/signup"><i class="write icon"></i>Signup</a>        
+        <a class="item"  href="/signup"><i class="write icon"></i>Signup</a>
+        <a class="item"  href="/community"><i class="comments outline icon"></i>Discussion Boards</a>
+        <a class="item"  href="/search"><i class="shop icon"></i>Market</a>
         <%end%>
-       
+        <a class="item"  href="/help"><i class="help icon"></i>About/Help</a>      
+       </div>
     </div>
     <div class="ui thin sidebar inverted vertical menu">
         <%=render 'layouts/sidebar' if logged_in?%>
     </div>
-     <h1></h1>
+     <%=render 'shared/error_messages', object: flash%>
      <div id="content">
-      <div class="ui active centered large inline loader" id='loader'></div>
-      <%=(render 'shared/error_messages', object: flash)%>
-      <%=yield%>      
+      <div class="ui loader" id='loader'></div>
+      <%=yield%>    
      </div>
          
-         
+         <h1></h1>
+         <h1></h1>
   
-    
+    <div class="script">
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    
+    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
      <script>
+                             
         $('.ui.dropdown').dropdown();
         
          $('#side_btn').on('click', function(){
@@ -47,22 +55,13 @@
             .sidebar('toggle')
            ;    
          })
-        $('.ui .message .close')
-              .on('click', function() {
-                $(this)
-                  .closest('.message')
-                  .transition('fade')
-                ;
-              })
-            ;
-        $('#masonry').masonry({
-          itemSelector: '.mason-item',
-          isFitWidth: true    
-        });
-        
+         
+    
          $('#dash_tab .item').tab();
-
+             
+            
     
     </script>
+    </div>
 </body>
 </html>

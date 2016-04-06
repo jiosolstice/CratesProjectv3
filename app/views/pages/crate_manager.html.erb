@@ -1,0 +1,74 @@
+<h2></h2>
+<div class="ui container">
+
+        <table class="ui compact table">
+         <thead>
+            <tr>
+                <th>Active Crates</th>
+                <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <%@active_crates.each do |crate| %>
+              <tr>
+                  <td><%=link_to crate.name, crate , class: 'item'%></td>
+                  <td>
+                  <% unless crate == '' || crate == nil %>
+                     <%=link_to 'Inactivate',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 2%> 
+                       |  
+                      <%=link_to 'Archive',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 3%> 
+                  <%end%>
+                  </td>
+              </tr>
+          <%end%>
+            
+         </tbody>
+     </table>
+
+       
+
+        <table class="ui compact table">
+         <thead>
+            <tr>
+                <th>Inactive Crates</th>
+                <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <%@inactive_crates.each do |crate| %>
+              <tr>
+                  <td><%=link_to crate.name, crate , class: 'item'%></td>
+                  <td>
+                  <% unless crate == '' || crate == nil %>
+                     <%=link_to 'Activate',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 1%>
+                  <%end%>
+                  </td>
+              </tr>
+          <%end%>
+            
+         </tbody>
+     </table>
+        <table class="ui compact table">
+         <thead>
+            <tr>
+                <th>Archived Crates</th>
+                <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <%@fin_crates.each do |crate| %>
+              <tr>
+                  <td><%=link_to crate.name, crate , class: 'item'%></td>
+                  <td>
+                  <% unless crate == '' || crate == nil %>
+                      <%=link_to 'Activate',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 1%>
+                  <%end%>
+                  </td>
+              </tr>
+          <%end%>
+            
+         </tbody>
+    </table>
+    
+    
+</div>

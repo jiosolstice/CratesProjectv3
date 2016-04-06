@@ -7,13 +7,24 @@ class Crate < ActiveRecord::Base
   has_many :taggings ,:dependent => :delete_all
   has_many :tags, :through => :taggings
   has_many :pictures, :dependent => :delete_all
+  has_many :queries, :dependent => :delete_all    
   has_one :location
   default_scope -> { order(created_at: :desc)}
+  validate  :validate_tags
+  validate  :validate_pictures
   validates :user_id, presence: true
-  validates :name, presence: true, length: {maximum: 30}
-  validates :description, presence: true
-  validates :states_id,presence: true
-  validates :price, presence: true
+  validates :name, presence: true, length: {minimum: 3,maximum: 30}
+  validates :description, presence: true, length: {maximum: 300}
+  validates :states_id,presence: true, :numericality => {:greater_than_or_equal_to => 0, :less_than =>2}
+  validates :price, presence: true, :numericality => {:greater_than => 0, :less_than =>1000000000}
+    
+  def validate_tags
+    errors.add(:tags, "Up to 5 Tags only") if tags.size > 5
+  end
+    
+    def validate_pictures
+        errors.add(:pictures, "You have reached the 5 image limit") if pictures.size > 4
+    end
     
     def all_tags=(names)
         self.tags = names.split(",").map do |name|

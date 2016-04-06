@@ -1,9 +1,10 @@
-<%=content_for :title, 'Crate' %>
-<div class="ui segment container" id="full_crate">
+<%=content_for :title, @crate.name %>
+<h2></h2>
+<div class="ui container">
         <div class="ui <%=find_state_color @crate.states_id%> label raised segment" id="status_tag">
             <%=find_status @crate.states_id %>
         </div>
-        <div class="ui items">
+        <div class="ui items container">
           <div class="item">
                <div class="ui very large image">
                 <%@images.each do |pic| %>
@@ -23,16 +24,19 @@
                    </div>
                    <div class="meta">
                        <i class="cube icon"></i><span class="cinema"><%=crate_quality(@crate.qualities_id)%></span>
+                       <i class="user icon"></i><span class="cinema">Owned by: <%= link_to @crate.user.alias, @crate.user %></span>                       
+                       <h3>Contact: <%=@contact%></h3>
                    </div>
-                    <div class="extra">
-                           <div class="extra">Owned by: <%= link_to @crate.user.alias, @crate.user %></div>
-                           <div class="extra">Posted <%=(@crate.created_at).strftime('%B %d, %Y')%></div>
-                    </div>
                     <div class="description">
-                               <h4><p><%= simple_format(@crate.description) %></p></h4>
+                               <h4>
+                               Details:
+                               <p><%=simple_format(@crate.description) %></p></h4>
                     </div>
                     <div class="meta">
                         <div class="ui label">Tags: <%=raw tag_links(@crate.all_tags)%></div>
+                    </div>
+                    <div class="extra">
+                           <div class="extra">Posted <%=(@crate.created_at).strftime('%B %d, %Y')%></div>
                     </div>
                    </div>
             </div>
@@ -45,7 +49,35 @@
                     </div>
                 <%end%>
             
-      
-    </div>
+            
+            
+            <div class="ui comments">
+            <h3 class="ui dividing header">Queries</h3>    
+            <%@queries.each do |query|%>
+               <div class="comment">
+                  <div class="avatar">
+                    <%user= query.user%>
+                    <%=image_tag user.avatar, class:'ui tiny image'%>
+                   </div>
+                <div class="content">
+                  <%=link_to user.alias, user, class:'author'%>
+                  asked
+                  <%= query.title %>
+                  <div class="metadata">
+                    <span class="date"><%=time_ago_in_words(query.created_at)%> ago</span>
+                  </div>
+                  <div class="text">
+                  <%=simple_format(query.description)%>
+                  </div>
+                  <div class="actions">
+                    <%#if logged_in? && is_owner?(comment.user_id)%>
+                    <%#=link_to 'Edit', edit_forum_post_forum_comment_path(@forum_post.id,comment.id)%>
+                    <%#end%>
+                  </div>
+                </div>
+              </div>
+            <%end%>
+            <%=render 'queries/query_form', query: @query %>
 
-
+           </div>
+</div>
