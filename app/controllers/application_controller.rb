@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
         end
   end    
     
+  def dont_url_manipulate
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+  end
+    
   
     
 end

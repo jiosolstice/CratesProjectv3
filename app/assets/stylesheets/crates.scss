@@ -30,3 +30,11 @@ p, #cratePartial{
     margin-bottom: 10px;
     padding: 0px !important;
 }
+
+#tables{
+    display: inline-block;
+}
+
+.crate.ui.table{
+    max-width: 250px !important;
+}

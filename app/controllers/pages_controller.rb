@@ -5,18 +5,17 @@ class PagesController < ApplicationController
         @active_crates = search_byst(current_user.id, 1)
         @inactive_crates = search_byst(current_user.id, 2)
         @fin_crates = search_byst(current_user.id, 3)
-    end
+    end     
     
     def crate_manager
         @active_crates = search_byst(current_user.id, 1)
         @inactive_crates = search_byst(current_user.id, 2)
         @fin_crates = search_byst(current_user.id, 3)    
-        if (params.has_key?(:crate_id) && params.has_key?(:active_id))
-            Crate.find(params[:crate_id]).update_attributes(active_status_id: params[:active_id])
-        end
     end
     
-    def help
+    def change_status
+        Crate.find(params[:crate_id]).update_attributes(active_status_id: params[:active_id])
+        redirect_to crate_manager_path
     end
     
     def community
@@ -37,4 +36,5 @@ class PagesController < ApplicationController
     def is_logged_in
         render :home_guest unless logged_in?
     end
+    
 end

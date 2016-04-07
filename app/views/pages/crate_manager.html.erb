@@ -1,7 +1,6 @@
 <h2></h2>
-<div class="ui container">
-
-        <table class="ui compact table">
+<div class="ui container" >
+        <table class="crate ui table">
          <thead>
             <tr>
                 <th>Active Crates</th>
@@ -14,9 +13,8 @@
                   <td><%=link_to crate.name, crate , class: 'item'%></td>
                   <td>
                   <% unless crate == '' || crate == nil %>
-                     <%=link_to 'Inactivate',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 2%> 
-                       |  
-                      <%=link_to 'Archive',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 3%> 
+                     <%=button_to 'Inactivate',:controller =>'pages',:action => 'change_status', :crate_id => crate.id, :active_id => 2%> 
+                     <%=button_to 'Archive',:controller =>'pages',:action => 'change_status', :crate_id => crate.id, :active_id => 3%> 
                   <%end%>
                   </td>
               </tr>
@@ -24,10 +22,7 @@
             
          </tbody>
      </table>
-
-       
-
-        <table class="ui compact table">
+        <table class="crate ui table">
          <thead>
             <tr>
                 <th>Inactive Crates</th>
@@ -39,8 +34,8 @@
               <tr>
                   <td><%=link_to crate.name, crate , class: 'item'%></td>
                   <td>
-                  <% unless crate == '' || crate == nil %>
-                     <%=link_to 'Activate',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 1%>
+                  <%unless crate == '' || crate == nil%>
+                     <%=button_to 'Activate',:controller =>'pages',:action => 'change_status', :crate_id => crate.id, :active_id => 1%>
                   <%end%>
                   </td>
               </tr>
@@ -48,7 +43,7 @@
             
          </tbody>
      </table>
-        <table class="ui compact table">
+        <table class="crate ui table">
          <thead>
             <tr>
                 <th>Archived Crates</th>
@@ -61,7 +56,7 @@
                   <td><%=link_to crate.name, crate , class: 'item'%></td>
                   <td>
                   <% unless crate == '' || crate == nil %>
-                      <%=link_to 'Activate',:controller =>'pages',:action => 'crate_manager', :crate_id => crate.id, :active_id => 1%>
+                      <%=button_to 'Activate',:controller =>'pages',:action => 'change_status', :crate_id => crate.id, :active_id => 1%>
                   <%end%>
                   </td>
               </tr>
@@ -69,6 +64,4 @@
             
          </tbody>
     </table>
-    
-    
 </div>

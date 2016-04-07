@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     get 'change_pin' => 'forum_posts#change_pin'
     get 'change_lock' => 'forum_posts#change_lock'
     post 'new_comment' => 'forum_comments_controller#create', as: 'new_comment'
+    get 'crate_manager' => 'pages#crate_manager'
+    post 'change_status' => 'pages#change_status'
     
     resources :users do
         resources :profiles
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
     resources :crates
     
     resources :queries, only: [:create,:update]
+    resources :replies, only:[:create,:update]
     
     resources :account_activations, only: [:edit]
     resources :password_resets, only: [:new, :create, :edit, :update]

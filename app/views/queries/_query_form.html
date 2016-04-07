@@ -6,9 +6,10 @@
                   <%= f.text_field :title ,class: 'ui field'%>
                   <label>Body</label>
                   <%= f.text_area :description ,class: 'ui field' %>
-                  <%= f.hidden_field :crate_id, value: @crate.id%>
+                  <%= f.hidden_field :crate_id, value: @crate.id %>
                 </div>
-                <%= button_tag(type: 'submit', class: "ui submit labeled icon button") do %>
-                <i class="edit icon"></i> Ask
+                
+                <%=button_tag(type: 'submit', class: "ui submit labeled icon button") do %>
+                <i class="edit icon"></i>Ask
                 <% end %>
 <% end %> 

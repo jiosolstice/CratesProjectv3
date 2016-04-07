@@ -62,10 +62,5 @@ module SessionsHelper
   def is_admin?
     #current_user.admin? unless current_user == nil
   end
-  
-  #redirects whenever an invalid url manipulation  
-  def dont_url_manipulate
-    redirect_to root_path
-  end
     
 end
