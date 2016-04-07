@@ -12,3 +12,5 @@
 !/log/.keep
 /tmp
 config/secrets.yml
+Gemfile.lock
+db/schema.rb
