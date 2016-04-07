@@ -10,7 +10,8 @@
             <div class="field"><%= f.password_field :password, :placeholder => "Password" %></div>
             <div class="field"><%= f.password_field :password_confirmation, :placeholder => "Confirm Password"%></div>
             <div class="field">
-            <label>User Picture</label>
+            <label>Avatar</label>
+                <%=image_tag @user.avatar.url(:medium) ,class: 'ui centered medium image'%>
             <%= f.file_field :avatar %>     
             </div>
         <%= f.submit "Edit Account", class: "ui submit button"%>
